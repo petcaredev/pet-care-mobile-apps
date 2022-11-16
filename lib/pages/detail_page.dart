@@ -23,7 +23,7 @@ class DetailPage extends StatelessWidget {
         ),
         title: Text(
           'Lilipoet Pet Clinic',
-          style: text14(),
+          style: text13(weight: FontWeight.w400),
         ),
       ),
       bottomNavigationBar: Padding(

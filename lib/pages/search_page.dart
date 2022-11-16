@@ -23,25 +23,53 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: TextField(
-          controller: textEditingController,
-          decoration: InputDecoration(
+        // leading: IconButton(
+        //   onPressed: () {
+        //     textEditingController.clear();
+        //   },
+        //   icon: Icon(
+        //     Icons.close,
+        //     color: otherColor,
+        //   ),
+        // ),
+        title: Container(
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: black15,
+              width: 1,
+            ),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: TextField(
+            controller: textEditingController,
+            style: text11(
+              weight: FontWeight.w400,
+            ),
+            decoration: InputDecoration(
               hintText: 'Cari klinik atau layanan',
               hintStyle: text11(
                 weight: FontWeight.w400,
                 color: black50,
               ),
-              border: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.black,
-                  width: 5,
-                ),
-                borderRadius: BorderRadius.circular(10),
+              focusedBorder: InputBorder.none,
+              prefixIcon: Icon(
+                Icons.search,
+                color: otherColor50,
               ),
-              fillColor: Colors.red),
-          cursorColor: mainColor,
-          onSubmitted: (value) {},
+            ),
+            cursorColor: mainColor,
+            onSubmitted: (value) {},
+          ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.close,
+              color: otherColor,
+            ),
+          ),
+        ],
       ),
     );
   }

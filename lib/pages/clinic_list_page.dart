@@ -11,7 +11,7 @@ class ClinicListPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           'Klinik Sekitar Anda',
-          style: text14(weight: FontWeight.normal),
+          style: text13(weight: FontWeight.w400),
         ),
         actions: [
           IconButton(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pet_care_mobile_apps/pages/detail_page.dart';
 import 'package:pet_care_mobile_apps/pages/home_page.dart';
+import 'package:pet_care_mobile_apps/pages/login_page.dart';
+import 'package:pet_care_mobile_apps/pages/register_page.dart';
 import 'package:pet_care_mobile_apps/providers/bottom_navigation_bar_provider.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
 import 'package:provider/provider.dart';
@@ -41,8 +43,10 @@ class PetCareApp extends StatelessWidget {
           textTheme: kTextTheme,
         ),
         debugShowCheckedModeBanner: false,
-        initialRoute: HomePage.route,
+        initialRoute: LoginPage.route,
         routes: {
+          LoginPage.route: (context) => LoginPage(),
+          RegisterPage.route: (context) => RegisterPage(),
           HomePage.route: (context) => HomePage(),
           DetailPage.route: (context) => DetailPage(
               // id: ModalRoute.of(context)?.settings.arguments as String,

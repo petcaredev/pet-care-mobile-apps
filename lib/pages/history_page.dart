@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_care_mobile_apps/styles/styles.dart';
 
 class HistoryPage extends StatelessWidget {
   const HistoryPage({super.key});
@@ -7,7 +8,10 @@ class HistoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Riwayat'),
+        title: Text(
+          'Riwayat',
+          style: text13(weight: FontWeight.w400),
+        ),
       ),
       body: Container(),
     );
