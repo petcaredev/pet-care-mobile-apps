@@ -1,10 +1,8 @@
-import 'dart:async';
-
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:pet_care_mobile_apps/pages/home_page.dart';
 import 'package:pet_care_mobile_apps/pages/register_page.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
+import 'package:pet_care_mobile_apps/widgets/common_button.dart';
 import 'package:pet_care_mobile_apps/widgets/custom_text_form_field.dart';
 
 class LoginPage extends StatefulWidget {
@@ -18,6 +16,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _loginFormKey = GlobalKey<FormState>();
+
+  bool isVisible = false;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -61,8 +61,20 @@ class _LoginPageState extends State<LoginPage> {
                         textEditingController: passwordController,
                         textInputType: TextInputType.visiblePassword,
                         validation: 'Silahkan isi password Anda',
-                        obscureText: true,
+                        obscureText: isVisible ? false : true,
                         hintText: 'Password Anda',
+                        maxLines: 1,
+                        suffix: IconButton(
+                          onPressed: () {
+                            setState(() {
+                              isVisible = !isVisible;
+                            });
+                          },
+                          icon: Icon(isVisible
+                              ? Icons.visibility_off
+                              : Icons.visibility),
+                          color: otherColor85,
+                        ),
                       ),
                       SizedBox(
                         height: 15,
@@ -70,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                 ),
-                ElevatedButton(
+                CommonButton(
                   onPressed: () {
                     if (_loginFormKey.currentState!.validate()) {
                       Navigator.pushReplacementNamed(context, HomePage.route);
@@ -81,20 +93,9 @@ class _LoginPageState extends State<LoginPage> {
                       );
                     }
                   },
-                  style: ButtonStyle(
-                    backgroundColor: MaterialStatePropertyAll(mainColor),
-                    fixedSize: MaterialStatePropertyAll(
-                      Size(MediaQuery.of(context).size.width, 50),
-                    ),
-                    elevation: MaterialStatePropertyAll(0),
-                  ),
-                  child: Text(
-                    'Masuk',
-                    style: text14(
-                      weight: FontWeight.w500,
-                      color: Colors.white,
-                    ),
-                  ),
+                  buttonColor: mainColor,
+                  buttonText: 'Masuk',
+                  textColor: Colors.white,
                 ),
                 SizedBox(
                   height: 25,

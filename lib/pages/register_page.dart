@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_care_mobile_apps/pages/login_page.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
+import 'package:pet_care_mobile_apps/widgets/common_button.dart';
 import 'package:pet_care_mobile_apps/widgets/custom_text_form_field.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -14,6 +15,8 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final _registerFormKey = GlobalKey<FormState>();
+
+  bool isVisible = false;
 
   TextEditingController fullNameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -88,13 +91,25 @@ class _RegisterPageState extends State<RegisterPage> {
                       textEditingController: userPasswordController,
                       textInputType: TextInputType.visiblePassword,
                       validation: 'Silahkan isi password Anda',
-                      obscureText: true,
+                      obscureText: isVisible ? false : true,
                       hintText: 'Password Anda',
+                      maxLines: 1,
+                      suffix: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            isVisible = !isVisible;
+                          });
+                        },
+                        icon: Icon(isVisible
+                            ? Icons.visibility_off
+                            : Icons.visibility),
+                        color: otherColor85,
+                      ),
                     ),
                     SizedBox(
                       height: 15,
                     ),
-                    ElevatedButton(
+                    CommonButton(
                       onPressed: () {
                         if (_registerFormKey.currentState!.validate()) {
                           Navigator.pushReplacementNamed(
@@ -106,20 +121,9 @@ class _RegisterPageState extends State<RegisterPage> {
                           );
                         }
                       },
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStatePropertyAll(mainColor),
-                        fixedSize: MaterialStatePropertyAll(
-                          Size(MediaQuery.of(context).size.width, 50),
-                        ),
-                        elevation: MaterialStatePropertyAll(0),
-                      ),
-                      child: Text(
-                        'Daftar',
-                        style: text14(
-                          weight: FontWeight.w500,
-                          color: Colors.white,
-                        ),
-                      ),
+                      buttonColor: mainColor,
+                      buttonText: 'Daftar',
+                      textColor: Colors.white,
                     ),
                     SizedBox(
                       height: 25,

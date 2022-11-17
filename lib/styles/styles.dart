@@ -5,14 +5,16 @@ Color mainColor = const Color(0xFF9DB2CE);
 Color subColor50 = const Color(0x80383636);
 Color subColor75 = const Color(0xBF383636);
 Color subColor85 = const Color(0xD9383636);
-Color otherColor = const Color(0xFF565454);
-Color otherColor50 = const Color(0x80565454);
+Color otherColor = const Color(0xFF545454);
+Color otherColor50 = const Color(0x80545454);
+Color otherColor85 = const Color(0xD9545454);
 Color black10 = const Color(0x1A000000);
 Color black15 = const Color(0x26000000);
 Color black25 = const Color(0x40000000);
 Color black35 = const Color(0x59000000);
 Color black50 = const Color(0x80000000);
 Color black75 = const Color(0xBF000000);
+Color black85 = const Color(0xD9000000);
 Color errorColor = const Color(0xFFCC3300);
 
 TextStyle text9(

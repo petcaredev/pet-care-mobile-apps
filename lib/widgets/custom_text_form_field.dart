@@ -6,7 +6,10 @@ class CustomTextFormField extends StatefulWidget {
   final TextInputType textInputType;
   final String validation;
   final bool obscureText;
+  final int? maxLines;
   final String hintText;
+  final Widget? suffix;
+  final Color textColor;
 
   const CustomTextFormField({
     super.key,
@@ -15,6 +18,9 @@ class CustomTextFormField extends StatefulWidget {
     required this.validation,
     required this.obscureText,
     required this.hintText,
+    this.maxLines,
+    this.suffix,
+    this.textColor = Colors.black,
   });
 
   @override
@@ -34,10 +40,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       },
       style: text13(
         weight: FontWeight.w400,
+        color: widget.textColor,
       ),
       keyboardType: widget.textInputType,
       cursorColor: mainColor,
       obscureText: widget.obscureText,
+      maxLines: widget.maxLines,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(7),
@@ -72,6 +80,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           weight: FontWeight.w400,
           color: black35,
         ),
+        suffixIcon: widget.suffix,
       ),
     );
   }

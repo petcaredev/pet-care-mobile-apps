@@ -33,22 +33,22 @@ class _HomePageState extends State<HomePage> {
             items: const [
               BottomNavigationBarItem(
                 icon: Icon(Icons.home_outlined),
-                activeIcon: Icon(Icons.home),
+                activeIcon: Icon(Icons.home_rounded),
                 label: 'Beranda',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.search_outlined),
-                activeIcon: Icon(Icons.search),
+                activeIcon: Icon(Icons.search_rounded),
                 label: 'Cari',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.history_outlined),
-                activeIcon: Icon(Icons.history),
+                activeIcon: Icon(Icons.history_rounded),
                 label: 'Riwayat',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.person_outlined),
-                activeIcon: Icon(Icons.person),
+                icon: Icon(Icons.person_outline_rounded),
+                activeIcon: Icon(Icons.person_rounded),
                 label: 'Profil',
               ),
             ]),

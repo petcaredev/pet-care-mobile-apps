@@ -23,47 +23,45 @@ class _SearchPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // leading: IconButton(
-        //   onPressed: () {
-        //     textEditingController.clear();
-        //   },
-        //   icon: Icon(
-        //     Icons.close,
-        //     color: otherColor,
-        //   ),
-        // ),
-        title: Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: black15,
-              width: 1,
-            ),
-            borderRadius: BorderRadius.circular(5),
+        title: TextField(
+          controller: textEditingController,
+          style: text11(
+            weight: FontWeight.w400,
           ),
-          child: TextField(
-            controller: textEditingController,
-            style: text11(
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.all(0),
+            hintText: 'Cari klinik atau layanan',
+            hintStyle: text11(
               weight: FontWeight.w400,
+              color: black50,
             ),
-            decoration: InputDecoration(
-              hintText: 'Cari klinik atau layanan',
-              hintStyle: text11(
-                weight: FontWeight.w400,
-                color: black50,
-              ),
-              focusedBorder: InputBorder.none,
-              prefixIcon: Icon(
-                Icons.search,
-                color: otherColor50,
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5),
+              borderSide: BorderSide(
+                color: black15,
+                width: 1,
               ),
             ),
-            cursorColor: mainColor,
-            onSubmitted: (value) {},
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(5),
+              borderSide: BorderSide(
+                color: black15,
+                width: 1,
+              ),
+            ),
+            prefixIcon: Icon(
+              Icons.search,
+              color: otherColor50,
+            ),
           ),
+          cursorColor: mainColor,
+          onSubmitted: (value) {},
         ),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              textEditingController.clear();
+            },
             icon: Icon(
               Icons.close,
               color: otherColor,
