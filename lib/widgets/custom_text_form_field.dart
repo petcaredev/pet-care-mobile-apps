@@ -4,7 +4,7 @@ import 'package:pet_care_mobile_apps/styles/styles.dart';
 class CustomTextFormField extends StatefulWidget {
   final TextEditingController textEditingController;
   final TextInputType textInputType;
-  final String validation;
+  final String? validation;
   final bool obscureText;
   final int? maxLines;
   final String hintText;
@@ -15,9 +15,9 @@ class CustomTextFormField extends StatefulWidget {
     super.key,
     required this.textEditingController,
     required this.textInputType,
-    required this.validation,
-    required this.obscureText,
     required this.hintText,
+    this.validation,
+    this.obscureText = false,
     this.maxLines,
     this.suffix,
     this.textColor = Colors.black,
@@ -76,6 +76,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           ),
         ),
         hintText: widget.hintText,
+        hintMaxLines: 2,
         hintStyle: text13(
           weight: FontWeight.w400,
           color: black35,

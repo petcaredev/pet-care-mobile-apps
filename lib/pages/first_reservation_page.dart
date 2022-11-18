@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pet_care_mobile_apps/pages/second_reservation_page.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
 import 'package:pet_care_mobile_apps/widgets/reservation_checkbox.dart';
 import 'package:pet_care_mobile_apps/widgets/single_button_navigation_bar.dart';
 
 DateTime? reservationDate;
+List<bool> service = [false, false, false];
 
 class FirstReservationPage extends StatefulWidget {
   static const route = '/first-reservation-page';
@@ -34,7 +37,20 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
         ),
       ),
       bottomNavigationBar: SingleButtonNavigationBar(
-        onPressed: () {},
+        onPressed: () {
+          for (var element in service) {
+            print(element);
+            if (element == true) {
+              Navigator.pushNamed(context, SecondReservationPage.route);
+              break;
+            } else {
+              Fluttertoast.showToast(
+                msg:
+                    'Silahkan pilih tanggal reservasi dan layanan yang Anda inginkan',
+              );
+            }
+          }
+        },
         buttonText: 'Selanjutnya',
       ),
       body: SingleChildScrollView(
@@ -169,12 +185,7 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
                     lastDate: DateTime(2023),
                     selectableDayPredicate: (day) {
                       if ((day.isAfter(
-                              DateTime.now().subtract(Duration(days: 1)))) &&
-                          (day.isBefore(
-                            DateTime.now().add(
-                              Duration(days: 7),
-                            ),
-                          ))) {
+                          DateTime.now().subtract(Duration(days: 1))))) {
                         return true;
                       }
                       return false;
@@ -266,17 +277,32 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
                     ReservationCheckBox(
                       serviceName: 'Grooming Sehat',
                       servicePrice: 35000,
-                      value: false,
+                      value: service[0],
+                      onChanged: (value) {
+                        setState(() {
+                          service[0] = value!;
+                        });
+                      },
                     ),
                     ReservationCheckBox(
                       serviceName: 'Grooming Kering',
                       servicePrice: 25000,
-                      value: false,
+                      value: service[1],
+                      onChanged: (value) {
+                        setState(() {
+                          service[1] = value!;
+                        });
+                      },
                     ),
                     ReservationCheckBox(
                       serviceName: 'Trimming',
                       servicePrice: 15000,
-                      value: false,
+                      value: service[2],
+                      onChanged: (value) {
+                        setState(() {
+                          service[2] = value!;
+                        });
+                      },
                     ),
                   ],
                 ),

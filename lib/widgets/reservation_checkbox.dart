@@ -5,12 +5,14 @@ class ReservationCheckBox extends StatefulWidget {
   bool value;
   String serviceName;
   int servicePrice;
+  Function(bool?) onChanged;
 
   ReservationCheckBox({
     super.key,
     required this.serviceName,
     required this.servicePrice,
     required this.value,
+    required this.onChanged,
   });
 
   @override
@@ -42,11 +44,7 @@ class _ReservationCheckBoxState extends State<ReservationCheckBox> {
       ),
       contentPadding: EdgeInsets.all(0),
       value: widget.value,
-      onChanged: (value) {
-        setState(() {
-          widget.value = value!;
-        });
-      },
+      onChanged: widget.onChanged,
     );
   }
 }

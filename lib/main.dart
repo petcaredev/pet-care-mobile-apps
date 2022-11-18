@@ -5,6 +5,8 @@ import 'package:pet_care_mobile_apps/pages/first_reservation_page.dart';
 import 'package:pet_care_mobile_apps/pages/home_page.dart';
 import 'package:pet_care_mobile_apps/pages/login_page.dart';
 import 'package:pet_care_mobile_apps/pages/register_page.dart';
+import 'package:pet_care_mobile_apps/pages/reservation_detail_page.dart';
+import 'package:pet_care_mobile_apps/pages/second_reservation_page.dart';
 import 'package:pet_care_mobile_apps/providers/bottom_navigation_bar_provider.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
 import 'package:provider/provider.dart';
@@ -53,6 +55,8 @@ class PetCareApp extends StatelessWidget {
               // id: ModalRoute.of(context)?.settings.arguments as String,
               ),
           FirstReservationPage.route: (context) => FirstReservationPage(),
+          SecondReservationPage.route: (context) => SecondReservationPage(),
+          ReservationDetailPage.route: (context) => ReservationDetailPage(),
           ChangePasswordPage.route: (context) => ChangePasswordPage(),
           // SearchPage.route: (context) => SearchPage(),
           // HistoryPage.route: (context) => HistoryPage(),
