@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
+import 'package:pet_care_mobile_apps/widgets/reservation_checkbox.dart';
 import 'package:pet_care_mobile_apps/widgets/single_button_navigation_bar.dart';
+
+DateTime? reservationDate;
 
 class FirstReservationPage extends StatefulWidget {
   static const route = '/first-reservation-page';
@@ -10,8 +13,6 @@ class FirstReservationPage extends StatefulWidget {
   @override
   State<FirstReservationPage> createState() => _FirstReservationPageState();
 }
-
-DateTime? reservationDate;
 
 class _FirstReservationPageState extends State<FirstReservationPage> {
   @override
@@ -258,6 +259,24 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
                     Container(
                       height: 1,
                       color: black10,
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    ReservationCheckBox(
+                      serviceName: 'Grooming Sehat',
+                      servicePrice: 35000,
+                      value: false,
+                    ),
+                    ReservationCheckBox(
+                      serviceName: 'Grooming Kering',
+                      servicePrice: 25000,
+                      value: false,
+                    ),
+                    ReservationCheckBox(
+                      serviceName: 'Trimming',
+                      servicePrice: 15000,
+                      value: false,
                     ),
                   ],
                 ),
