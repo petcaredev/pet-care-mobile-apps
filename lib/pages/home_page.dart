@@ -25,10 +25,9 @@ class _HomePageState extends State<HomePage> {
             // selectedIconTheme: IconThemeData(
             //   color: Colors.white,
             // ),
-            fixedColor: Colors.black,
+            // fixedColor: Colors.black,
             // selectedLabelStyle: TextStyle(color: Colors.white),
             showUnselectedLabels: false,
-            // backgroundColor: mainColor,
             currentIndex: page.currentIndex,
             items: const [
               BottomNavigationBarItem(

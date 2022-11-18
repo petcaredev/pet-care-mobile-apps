@@ -4,6 +4,8 @@ import 'package:pet_care_mobile_apps/styles/styles.dart';
 import 'package:pet_care_mobile_apps/widgets/common_button.dart';
 import 'package:pet_care_mobile_apps/widgets/custom_text_form_field.dart';
 
+const List<String> userRole = <String>['Pengguna', 'Klinik'];
+
 class RegisterPage extends StatefulWidget {
   static const route = '/register-page';
 
@@ -15,6 +17,7 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final _registerFormKey = GlobalKey<FormState>();
+  String userRoleValue = userRole.first;
 
   bool isVisible = false;
 
@@ -104,6 +107,42 @@ class _RegisterPageState extends State<RegisterPage> {
                             ? Icons.visibility_off
                             : Icons.visibility),
                         color: otherColor85,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 10,
+                        vertical: 8,
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: black15, width: 1),
+                        borderRadius: BorderRadius.circular(7),
+                      ),
+                      child: DropdownButton(
+                        value: userRoleValue,
+                        style: text13(
+                          weight: FontWeight.w400,
+                          color: black35,
+                        ),
+                        elevation: 0,
+                        underline: Container(height: 0),
+                        isExpanded: true,
+                        items: userRole
+                            .map(
+                              (e) => DropdownMenuItem(
+                                value: e,
+                                child: Text(e),
+                              ),
+                            )
+                            .toList(),
+                        onChanged: (value) {
+                          setState(() {
+                            userRoleValue = value!;
+                          });
+                        },
                       ),
                     ),
                     SizedBox(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_care_mobile_apps/pages/change_password_page.dart';
 import 'package:pet_care_mobile_apps/pages/detail_page.dart';
+import 'package:pet_care_mobile_apps/pages/first_reservation_page.dart';
 import 'package:pet_care_mobile_apps/pages/home_page.dart';
 import 'package:pet_care_mobile_apps/pages/login_page.dart';
 import 'package:pet_care_mobile_apps/pages/register_page.dart';
@@ -26,20 +27,19 @@ class PetCareApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Pet Care App',
         theme: ThemeData(
-          //   primaryColor: mainColor,
-          //   scaffoldBackgroundColor: Colors.white,
+          primaryColor: mainColor,
           colorScheme: ColorScheme(
             brightness: Brightness.light,
-            primary: Colors.white,
+            primary: mainColor,
             onPrimary: Colors.black,
             secondary: mainColor,
             onSecondary: mainColor,
             error: Colors.red,
             onError: Colors.red,
             background: Colors.white,
-            onBackground: Colors.white,
+            onBackground: mainColor,
             surface: Colors.black,
-            onSurface: Colors.white,
+            onSurface: mainColor,
           ),
           textTheme: kTextTheme,
         ),
@@ -52,6 +52,7 @@ class PetCareApp extends StatelessWidget {
           DetailPage.route: (context) => DetailPage(
               // id: ModalRoute.of(context)?.settings.arguments as String,
               ),
+          FirstReservationPage.route: (context) => FirstReservationPage(),
           ChangePasswordPage.route: (context) => ChangePasswordPage(),
           // SearchPage.route: (context) => SearchPage(),
           // HistoryPage.route: (context) => HistoryPage(),

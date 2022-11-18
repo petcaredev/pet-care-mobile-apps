@@ -1,39 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:pet_care_mobile_apps/main.dart';
-import 'package:pet_care_mobile_apps/pages/first_reservation_page.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
-import 'package:pet_care_mobile_apps/widgets/clinic_service_card_list.dart';
 import 'package:pet_care_mobile_apps/widgets/single_button_navigation_bar.dart';
 
-class DetailPage extends StatelessWidget {
-  static const route = '/detail-page';
+class FirstReservationPage extends StatefulWidget {
+  static const route = '/first-reservation-page';
 
-  // final String id;
+  const FirstReservationPage({super.key});
 
-  const DetailPage({
-    super.key,
-    // required this.id,
-  });
+  @override
+  State<FirstReservationPage> createState() => _FirstReservationPageState();
+}
 
+DateTime? reservationDate;
+
+class _FirstReservationPageState extends State<FirstReservationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () {
+            Navigator.pop(context);
+          },
           icon: Icon(Icons.arrow_back),
         ),
         title: Text(
-          'Lilipoet Pet Clinic',
-          style: text13(weight: FontWeight.w400),
+          'Reservasi',
+          style: text13(
+            weight: FontWeight.w400,
+          ),
         ),
       ),
       bottomNavigationBar: SingleButtonNavigationBar(
-        onPressed: () {
-          Navigator.pushNamed(context, FirstReservationPage.route);
-        },
-        buttonText: 'Reservasi',
+        onPressed: () {},
+        buttonText: 'Selanjutnya',
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -55,27 +56,14 @@ class DetailPage extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            'Lokasi Klinik',
-                            style: text12(
-                              weight: FontWeight.w500,
-                              color: subColor85,
-                            ),
-                          ),
-                          TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                'Lihat Peta >',
-                                style: text12(
-                                  weight: FontWeight.w500,
-                                  color: mainColor,
-                                ),
-                              ))
-                        ],
+                      Text(
+                        'Lokasi Klinik',
+                        style: text12(
+                          weight: FontWeight.w500,
+                          color: subColor85,
+                        ),
                       ),
                       Container(
                         height: 1,
@@ -170,65 +158,108 @@ class DetailPage extends StatelessWidget {
               SizedBox(
                 height: 15,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: black25,
-                      blurRadius: 4,
-                      blurStyle: BlurStyle.outer,
-                    )
-                  ],
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+              GestureDetector(
+                onTap: () {
+                  showDatePicker(
+                    context: context,
+                    initialDate: reservationDate ?? DateTime.now(),
+                    // initialDate: reservationDate,
+                    firstDate: DateTime(2022),
+                    lastDate: DateTime(2023),
+                    selectableDayPredicate: (day) {
+                      if ((day.isAfter(
+                              DateTime.now().subtract(Duration(days: 1)))) &&
+                          (day.isBefore(
+                            DateTime.now().add(
+                              Duration(days: 7),
+                            ),
+                          ))) {
+                        return true;
+                      }
+                      return false;
+                    },
+                    helpText: 'Pilih tanggal reservasi',
+                    cancelText: 'BATAL',
+                    fieldHintText: 'Masukkan tanggal reservasi',
+                    fieldLabelText: 'Masukkan tanggal',
+                  ).then((value) {
+                    if (value != null) {
+                      setState(() {
+                        reservationDate = value;
+                      });
+                    }
+                  });
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 15,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(width: 1, color: black15),
+                    borderRadius: BorderRadius.circular(7),
+                  ),
+                  child: Row(
                     children: [
-                      Text(
-                        'Layanan',
-                        style: text12(
-                          weight: FontWeight.w500,
-                          color: subColor85,
-                        ),
+                      Icon(
+                        Icons.calendar_today,
+                        color: subColor50,
                       ),
                       SizedBox(
-                        height: 10,
+                        width: 10,
                       ),
-                      Container(
-                        height: 1,
-                        color: black10,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      ListView(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        children: [
-                          ClinicServiceCard(
-                            serviceName: 'Grooming Sehat',
-                            serviceDescription:
-                                'Grooming ini khusus untuk hewan yang sehat. Syarat bisa digrooming adalah tidak hamil, tidak demam, dan berumur diatas 2 bulan. ',
-                            serviceFee: 35000,
-                          ),
-                          ClinicServiceCard(
-                            serviceName: ' Grooming Kering',
-                            serviceDescription:
-                                'Grooming ini grooming yang tidak menggunakan air. Grooming kering menggunakan bedak khusus untuk mengatasi kutuan atau jamuran.',
-                            serviceFee: 25000,
-                          ),
-                          ClinicServiceCard(
-                            serviceName: 'Trimming',
-                            serviceDescription:
-                                'Trimming adalah potong kuku. Kuku hewan harus rutin dipotong untuk mencegah cakar melukai hewan lainya atau kita sendiri.',
-                            serviceFee: 15000,
-                          ),
-                        ],
-                      ),
+                      reservationDate != null
+                          ? Text(
+                              reservationDate.toString(),
+                              style: text13(
+                                weight: FontWeight.w400,
+                                color: black35,
+                              ),
+                            )
+                          : Text(
+                              'Pilih Tanggal',
+                              style: text13(
+                                weight: FontWeight.w400,
+                                color: black35,
+                              ),
+                            ),
                     ],
                   ),
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 15,
+                ),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 1,
+                    color: black15,
+                  ),
+                  borderRadius: BorderRadius.circular(7),
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Pilih Layanan',
+                      style: text13(
+                        weight: FontWeight.w400,
+                        color: subColor85,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Container(
+                      height: 1,
+                      color: black10,
+                    ),
+                  ],
                 ),
               ),
             ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_care_mobile_apps/data/account_data.dart';
 import 'package:pet_care_mobile_apps/pages/change_password_page.dart';
 import 'package:pet_care_mobile_apps/pages/login_page.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
@@ -15,20 +16,17 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final _profileFormKey = GlobalKey<FormState>();
 
-  TextEditingController nameController =
-      TextEditingController(text: 'Mohammad Wira Mardhotillah');
-  TextEditingController emailController =
-      TextEditingController(text: 'mohammadwiram@gmail.com');
-  TextEditingController phoneController =
-      TextEditingController(text: '082278962314');
-  TextEditingController addressController = TextEditingController(
-      text:
-          'Jl. Kyai Mojo No.18A, Bumijo, Kec. Jetis, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55231');
+  TextEditingController nameController = TextEditingController(text: fullName);
+  TextEditingController emailController = TextEditingController(text: email);
+  TextEditingController phoneController = TextEditingController(text: phone);
+  TextEditingController addressController =
+      TextEditingController(text: address);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: Text(
           'Profil',
           style: text13(weight: FontWeight.w400),
@@ -87,6 +85,8 @@ class _ProfilePageState extends State<ProfilePage> {
                             Navigator.pop(context);
                           },
                           style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStatePropertyAll(Colors.white),
                             fixedSize:
                                 MaterialStatePropertyAll(Size.fromWidth(100)),
                             elevation: MaterialStatePropertyAll(0),
@@ -213,6 +213,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       buttonColor: Colors.transparent,
                       buttonText: 'Ubah Data',
                       textColor: black50,
+                    ),
+                    SizedBox(
+                      height: 15,
                     ),
                   ],
                 ),
