@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pet_care_mobile_apps/data/account_data.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
 import 'package:pet_care_mobile_apps/widgets/common_button.dart';
 import 'package:pet_care_mobile_apps/widgets/custom_text_form_field.dart';
@@ -93,7 +95,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   CustomTextFormField(
                     textEditingController: newPasswordConfirmationController,
                     textInputType: TextInputType.visiblePassword,
-                    validation: 'Masukkan konfirmasi password baru Anda',
+                    validation: 'Konfirmasi password baru Anda',
                     obscureText:
                         isNewPasswordConfirmationVisible ? false : true,
                     hintText: 'Konfirmasi Password Baru',
@@ -117,11 +119,36 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   CommonButton(
                     onPressed: () {
                       if (_changePasswordFormKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Password berhasil diubah'),
-                          ),
-                        );
+                        if (oldPasswordController.text == password) {
+                          if (newPasswordController.text.length >= 8) {
+                            if (newPasswordController.text ==
+                                newPasswordConfirmationController.text) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Password berhasil diubah'),
+                                ),
+                              );
+                            } else {
+                              Fluttertoast.showToast(
+                                msg: 'Konfirmasi password salah',
+                                backgroundColor: errorColor,
+                                fontSize: 14,
+                              );
+                            }
+                          } else {
+                            Fluttertoast.showToast(
+                              msg: 'Password minimal 8 karakter',
+                              backgroundColor: errorColor,
+                              fontSize: 14,
+                            );
+                          }
+                        } else {
+                          Fluttertoast.showToast(
+                            msg: 'Password lama tidak sesuai',
+                            backgroundColor: errorColor,
+                            fontSize: 14,
+                          );
+                        }
                       }
                     },
                     buttonColor: mainColor,

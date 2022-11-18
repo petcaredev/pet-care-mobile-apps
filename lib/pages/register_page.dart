@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pet_care_mobile_apps/pages/login_page.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
 import 'package:pet_care_mobile_apps/widgets/common_button.dart';
@@ -151,13 +152,21 @@ class _RegisterPageState extends State<RegisterPage> {
                     CommonButton(
                       onPressed: () {
                         if (_registerFormKey.currentState!.validate()) {
-                          Navigator.pushReplacementNamed(
-                              context, LoginPage.route);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Akun berhasil dibuat'),
-                            ),
-                          );
+                          if (userPasswordController.text.length >= 8) {
+                            Navigator.pushReplacementNamed(
+                                context, LoginPage.route);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('Akun berhasil dibuat'),
+                              ),
+                            );
+                          } else {
+                            Fluttertoast.showToast(
+                              msg: 'Password minimal 8 karakter',
+                              backgroundColor: errorColor,
+                              fontSize: 14,
+                            );
+                          }
                         }
                       },
                       buttonColor: mainColor,

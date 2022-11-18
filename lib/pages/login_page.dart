@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pet_care_mobile_apps/data/account_data.dart';
 import 'package:pet_care_mobile_apps/pages/home_page.dart';
 import 'package:pet_care_mobile_apps/pages/register_page.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
@@ -84,13 +86,25 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 CommonButton(
                   onPressed: () {
+                    print(emailController.text);
+                    print(passwordController.text);
                     if (_loginFormKey.currentState!.validate()) {
-                      Navigator.pushReplacementNamed(context, HomePage.route);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Berhasil masuk'),
-                        ),
-                      );
+                      if (emailController.text == email &&
+                          passwordController.text == password) {
+                        Navigator.pushReplacementNamed(context, HomePage.route);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Berhasil masuk'),
+                          ),
+                        );
+                      } else {
+                        Fluttertoast.showToast(
+                          msg: 'Email atau password salah',
+                          backgroundColor: errorColor,
+                          fontSize: 14,
+                          textColor: Colors.white,
+                        );
+                      }
                     }
                   },
                   buttonColor: mainColor,
