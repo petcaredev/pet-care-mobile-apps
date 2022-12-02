@@ -14,12 +14,12 @@ class SingleButtonNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child: ElevatedButton(
         onPressed: onPressed,
         style: ButtonStyle(
           backgroundColor: MaterialStatePropertyAll(mainColor),
-          elevation: MaterialStatePropertyAll(0),
+          elevation: const MaterialStatePropertyAll(0),
           fixedSize: MaterialStatePropertyAll(
             Size(MediaQuery.of(context).size.width, 50),
           ),
@@ -30,7 +30,7 @@ class SingleButtonNavigationBar extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Text(
             buttonText,
             style: text12(

@@ -16,6 +16,7 @@ Color black50 = const Color(0x80000000);
 Color black75 = const Color(0xBF000000);
 Color black85 = const Color(0xD9000000);
 Color errorColor = const Color(0xFFCC3300);
+Color successColor = const Color(0xFF00CC33);
 
 TextStyle text9(
         {FontWeight weight = FontWeight.normal, Color color = Colors.black}) =>

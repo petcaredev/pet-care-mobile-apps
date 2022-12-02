@@ -5,6 +5,8 @@ import 'package:pet_care_mobile_apps/pages/login_page.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
 import 'package:pet_care_mobile_apps/widgets/common_button.dart';
 import 'package:pet_care_mobile_apps/widgets/custom_text_form_field.dart';
+import 'package:pet_care_mobile_apps/providers/auth_preferences_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -58,14 +60,18 @@ class _ProfilePageState extends State<ProfilePage> {
                       children: [
                         ElevatedButton(
                           onPressed: () {
+                            Provider.of<AuthPreferencesProvider>(context,
+                                listen: false)
+                              ..enableSignIn(false)
+                              ..clearDataUserAuth();
                             Navigator.pushReplacementNamed(
                                 context, LoginPage.route);
                           },
                           style: ButtonStyle(
-                            fixedSize: MaterialStatePropertyAll(
+                            fixedSize: const MaterialStatePropertyAll(
                               Size.fromWidth(100),
                             ),
-                            elevation: MaterialStatePropertyAll(0),
+                            elevation: const MaterialStatePropertyAll(0),
                             backgroundColor:
                                 MaterialStatePropertyAll(mainColor),
                           ),
@@ -77,7 +83,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 16,
                         ),
                         ElevatedButton(
@@ -86,10 +92,10 @@ class _ProfilePageState extends State<ProfilePage> {
                           },
                           style: ButtonStyle(
                             backgroundColor:
-                                MaterialStatePropertyAll(Colors.white),
-                            fixedSize:
-                                MaterialStatePropertyAll(Size.fromWidth(100)),
-                            elevation: MaterialStatePropertyAll(0),
+                                const MaterialStatePropertyAll(Colors.white),
+                            fixedSize: const MaterialStatePropertyAll(
+                                Size.fromWidth(100)),
+                            elevation: const MaterialStatePropertyAll(0),
                             side: MaterialStatePropertyAll(
                               BorderSide(
                                 width: 1,
@@ -149,7 +155,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       hintText: 'Nama Lengkap',
                       textColor: black50,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     CustomTextFormField(
@@ -160,7 +166,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       hintText: 'Email',
                       textColor: black50,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     CustomTextFormField(
@@ -171,7 +177,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       hintText: 'No. Telepon',
                       textColor: black50,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     CustomTextFormField(
@@ -182,7 +188,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       hintText: 'Alamat',
                       textColor: black50,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     CommonButton(
@@ -193,14 +199,14 @@ class _ProfilePageState extends State<ProfilePage> {
                       buttonText: 'Ubah Password',
                       textColor: Colors.white,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     CommonButton(
                       onPressed: () {
                         if (_profileFormKey.currentState!.validate()) {
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                               content: Text('Data berhasil diubah'),
                             ),
                           );
@@ -214,7 +220,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       buttonText: 'Ubah Data',
                       textColor: black50,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                   ],

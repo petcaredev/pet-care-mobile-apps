@@ -8,11 +8,18 @@ import 'package:pet_care_mobile_apps/pages/register_page.dart';
 import 'package:pet_care_mobile_apps/pages/reservation_detail_page.dart';
 import 'package:pet_care_mobile_apps/pages/second_reservation_page.dart';
 import 'package:pet_care_mobile_apps/providers/bottom_navigation_bar_provider.dart';
+import 'package:pet_care_mobile_apps/data/api/api_service.dart';
+import 'package:pet_care_mobile_apps/data/preferences/auth_preferences.dart';
+import 'package:pet_care_mobile_apps/providers/auth_preferences_provider.dart';
+import 'package:pet_care_mobile_apps/providers/auth_provider.dart';
+import 'package:pet_care_mobile_apps/providers/clinic_provider.dart';
+import 'package:pet_care_mobile_apps/providers/profile_provider.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  runApp(PetCareApp());
+  runApp(const PetCareApp());
 }
 
 class PetCareApp extends StatelessWidget {
@@ -24,7 +31,23 @@ class PetCareApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<BottomNavigationBarProvider>(
           create: (context) => BottomNavigationBarProvider(),
-        )
+        ),
+        ChangeNotifierProvider<AuthProvider>(
+          create: (context) => AuthProvider(apiService: ApiService()),
+        ),
+        ChangeNotifierProvider<AuthPreferencesProvider>(
+          create: (context) => AuthPreferencesProvider(
+            authPreferences: AuthPreferences(
+              sharedPreferences: SharedPreferences.getInstance(),
+            ),
+          ),
+        ),
+        ChangeNotifierProvider<ClinicProvider>(
+          create: (context) => ClinicProvider(apiService: ApiService()),
+        ),
+        ChangeNotifierProvider<ProfileProvider>(
+          create: (context) => ProfileProvider(apiService: ApiService()),
+        ),
       ],
       child: MaterialApp(
         title: 'Pet Care App',
@@ -48,16 +71,18 @@ class PetCareApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: LoginPage.route,
         routes: {
-          LoginPage.route: (context) => LoginPage(),
-          RegisterPage.route: (context) => RegisterPage(),
-          HomePage.route: (context) => HomePage(),
-          DetailPage.route: (context) => DetailPage(
+          LoginPage.route: (context) => const LoginPage(),
+          RegisterPage.route: (context) => const RegisterPage(),
+          HomePage.route: (context) => const HomePage(),
+          DetailPage.route: (context) => const DetailPage(
               // id: ModalRoute.of(context)?.settings.arguments as String,
               ),
-          FirstReservationPage.route: (context) => FirstReservationPage(),
-          SecondReservationPage.route: (context) => SecondReservationPage(),
-          ReservationDetailPage.route: (context) => ReservationDetailPage(),
-          ChangePasswordPage.route: (context) => ChangePasswordPage(),
+          FirstReservationPage.route: (context) => const FirstReservationPage(),
+          SecondReservationPage.route: (context) =>
+              const SecondReservationPage(),
+          ReservationDetailPage.route: (context) =>
+              const ReservationDetailPage(),
+          ChangePasswordPage.route: (context) => const ChangePasswordPage(),
           // SearchPage.route: (context) => SearchPage(),
           // HistoryPage.route: (context) => HistoryPage(),
           // ProfilePage.route: (context) => ProfilePage(),

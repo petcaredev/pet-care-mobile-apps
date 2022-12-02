@@ -32,7 +32,7 @@ class _SecondReservationPageState extends State<SecondReservationPage> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
         ),
         title: Text(
           'Reservasi',
@@ -64,7 +64,7 @@ class _SecondReservationPageState extends State<SecondReservationPage> {
                       validation: 'Silahkan isi nama Anda',
                       hintText: 'Nama Anda',
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     CustomTextFormField(
@@ -73,7 +73,7 @@ class _SecondReservationPageState extends State<SecondReservationPage> {
                       validation: 'Silahkan isi nama hewan peliharaan Anda',
                       hintText: 'Nama Hewan',
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     CustomTextFormField(
@@ -83,7 +83,7 @@ class _SecondReservationPageState extends State<SecondReservationPage> {
                           'Silahkan masukkan jenis hewan peliharaan Anda',
                       hintText: 'Jenis Hewan',
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                   ],

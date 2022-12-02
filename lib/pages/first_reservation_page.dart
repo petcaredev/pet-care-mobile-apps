@@ -27,7 +27,7 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
         ),
         title: Text(
           'Reservasi',
@@ -39,7 +39,7 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
       bottomNavigationBar: SingleButtonNavigationBar(
         onPressed: () {
           for (var element in service) {
-            print(element);
+            // print(element);
             if (element == true) {
               Navigator.pushNamed(context, SecondReservationPage.route);
               break;
@@ -86,14 +86,14 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
                         height: 1,
                         color: black10,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Row(
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(9),
-                            child: Image(
+                            child: const Image(
                               image:
                                   NetworkImage('https://picsum.photos/200/300'),
                               width: 100,
@@ -101,7 +101,7 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
                               fit: BoxFit.fitWidth,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Expanded(
@@ -122,7 +122,7 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
                                     color: subColor50,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 Row(
@@ -132,7 +132,7 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
                                       size: 14,
                                       color: subColor50,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 5,
                                     ),
                                     Text(
@@ -151,7 +151,7 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
                                       size: 14,
                                       color: subColor50,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 5,
                                     ),
                                     Text(
@@ -172,7 +172,7 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               GestureDetector(
@@ -185,7 +185,7 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
                     lastDate: DateTime(2023),
                     selectableDayPredicate: (day) {
                       if ((day.isAfter(
-                          DateTime.now().subtract(Duration(days: 1))))) {
+                          DateTime.now().subtract(const Duration(days: 1))))) {
                         return true;
                       }
                       return false;
@@ -203,7 +203,7 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
                   });
                 },
                 child: Container(
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 20,
                     vertical: 15,
                   ),
@@ -217,7 +217,7 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
                         Icons.calendar_today,
                         color: subColor50,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       reservationDate != null
@@ -239,11 +239,11 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Container(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 20,
                   vertical: 15,
                 ),
@@ -264,14 +264,14 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
                         color: subColor85,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Container(
                       height: 1,
                       color: black10,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     ReservationCheckBox(

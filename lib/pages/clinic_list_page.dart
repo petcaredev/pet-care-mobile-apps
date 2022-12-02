@@ -1,9 +1,39 @@
 import 'package:flutter/material.dart';
+import 'package:pet_care_mobile_apps/providers/auth_preferences_provider.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
+import 'package:pet_care_mobile_apps/providers/clinic_provider.dart';
 import 'package:pet_care_mobile_apps/widgets/clinic_card_list.dart';
+import 'package:provider/provider.dart';
+import 'package:pet_care_mobile_apps/utils/result_state.dart';
 
-class ClinicListPage extends StatelessWidget {
+class ClinicListPage extends StatefulWidget {
   const ClinicListPage({super.key});
+
+  @override
+  State<ClinicListPage> createState() => _ClinicListPageState();
+}
+
+class _ClinicListPageState extends State<ClinicListPage> {
+  ClinicProvider? _clinicProvider;
+  String? _accessToken;
+
+  void loadClinicList() {
+    setState(() {
+      _clinicProvider = Provider.of<ClinicProvider>(context, listen: false);
+      _clinicProvider!.fetchAllClinics(_accessToken!);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final authPreferencesProvider =
+          Provider.of<AuthPreferencesProvider>(context, listen: false);
+      _accessToken = authPreferencesProvider.dataUserAuth['accessToken'];
+      loadClinicList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +46,7 @@ class ClinicListPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(
+            icon: const Icon(
               Icons.notifications_outlined,
               color: Colors.black,
             ),
@@ -24,50 +54,32 @@ class ClinicListPage extends StatelessWidget {
         ],
         backgroundColor: Colors.white,
       ),
-      body: ListView(
-        // padding: EdgeInsets.all(20),
-        children: [
-          ClinicCard(
-            clinicName: 'clinicName',
-            clinicAddress: 'clinicAddress',
-            clinicDistance: 1,
-          ),
-          ClinicCard(
-            clinicName: 'clinicName',
-            clinicAddress: 'clinicAddress',
-            clinicDistance: 1,
-          ),
-          ClinicCard(
-            clinicName: 'clinicName',
-            clinicAddress: 'clinicAddress',
-            clinicDistance: 1,
-          ),
-          ClinicCard(
-            clinicName: 'clinicName',
-            clinicAddress: 'clinicAddress',
-            clinicDistance: 1,
-          ),
-          ClinicCard(
-            clinicName: 'clinicName',
-            clinicAddress: 'clinicAddress',
-            clinicDistance: 1,
-          ),
-          ClinicCard(
-            clinicName: 'clinicName',
-            clinicAddress: 'clinicAddress',
-            clinicDistance: 1,
-          ),
-          ClinicCard(
-            clinicName: 'clinicName',
-            clinicAddress: 'clinicAddress',
-            clinicDistance: 1,
-          ),
-          ClinicCard(
-            clinicName: 'clinicName',
-            clinicAddress: 'clinicAddress',
-            clinicDistance: 1,
-          ),
-        ],
+      body: Consumer<ClinicProvider>(
+        builder: (context, provider, _) {
+          if (provider.state == ResultState.loading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (provider.state == ResultState.hasData) {
+            return ListView.builder(
+              shrinkWrap: true,
+              itemCount: provider.result.data.length,
+              itemBuilder: (context, index) {
+                var clinic = provider.result.data[index];
+                return ClinicCard(
+                  clinicPoster: clinic.posterPath,
+                  clinicName: clinic.name,
+                  clinicAddress: clinic.address,
+                  clinicDistance: 1,
+                );
+              },
+            );
+          } else if (provider.state == ResultState.error) {
+            return Center(
+              child: Text(provider.message),
+            );
+          } else {
+            return const Center(child: Text('Maaaf, terjadi kesalahan'));
+          }
+        },
       ),
     );
   }
