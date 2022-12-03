@@ -27,7 +27,7 @@ class CommonButton extends StatelessWidget {
         fixedSize: MaterialStatePropertyAll(
           Size(MediaQuery.of(context).size.width, 50),
         ),
-        elevation: MaterialStatePropertyAll(0),
+        elevation: const MaterialStatePropertyAll(0),
       ),
       child: Text(
         buttonText,

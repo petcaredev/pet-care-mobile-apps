@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:pet_care_mobile_apps/data/account_data.dart';
 import 'package:pet_care_mobile_apps/pages/home_page.dart';
 import 'package:pet_care_mobile_apps/pages/register_page.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
 import 'package:pet_care_mobile_apps/widgets/common_button.dart';
 import 'package:pet_care_mobile_apps/widgets/custom_text_form_field.dart';
+import 'package:pet_care_mobile_apps/data/api/api_service.dart';
+import 'package:pet_care_mobile_apps/providers/auth_provider.dart';
+import 'package:pet_care_mobile_apps/providers/auth_preferences_provider.dart';
+import 'package:pet_care_mobile_apps/data/models/error_response.dart';
+import 'package:pet_care_mobile_apps/data/models/form_error_response.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   static const route = '/login-page';
@@ -25,20 +30,32 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController passwordController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final authPreferencesProvider =
+          Provider.of<AuthPreferencesProvider>(context, listen: false);
+      if (authPreferencesProvider.isSignedIn) {
+        Navigator.pushReplacementNamed(context, HomePage.route);
+      }
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
-          padding: EdgeInsets.only(top: 61),
+          padding: const EdgeInsets.only(top: 61),
           child: Padding(
             padding: const EdgeInsets.all(12),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Center(
+                const Center(
                   child: Padding(
-                    padding: const EdgeInsets.only(bottom: 61),
+                    padding: EdgeInsets.only(bottom: 61),
                     child: Image(
                       image: AssetImage('images/colored_cat.png'),
                       height: 75,
@@ -56,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
                         obscureText: false,
                         hintText: 'Email Anda',
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       CustomTextFormField(
@@ -78,7 +95,7 @@ class _LoginPageState extends State<LoginPage> {
                           color: otherColor85,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                     ],
@@ -86,32 +103,51 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 CommonButton(
                   onPressed: () {
-                    print(emailController.text);
-                    print(passwordController.text);
                     if (_loginFormKey.currentState!.validate()) {
-                      if (emailController.text == email &&
-                          passwordController.text == password) {
-                        Navigator.pushReplacementNamed(context, HomePage.route);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text('Berhasil masuk'),
-                          ),
-                        );
-                      } else {
-                        Fluttertoast.showToast(
-                          msg: 'Email atau password salah',
-                          backgroundColor: errorColor,
-                          fontSize: 14,
-                          textColor: Colors.white,
-                        );
-                      }
+                      AuthProvider(apiService: ApiService())
+                          .signIn(emailController.text, passwordController.text)
+                          .then(
+                        (result) {
+                          if (result.error) {
+                            if (result is ErrorResponse) {
+                              Fluttertoast.showToast(
+                                msg: result.message,
+                                backgroundColor: errorColor,
+                                fontSize: 14,
+                                textColor: Colors.white,
+                              );
+                            } else if (result is FormErrorResponse) {
+                              for (var error in result.errors) {
+                                Fluttertoast.showToast(
+                                  msg: error.msg,
+                                  backgroundColor: errorColor,
+                                  fontSize: 14,
+                                  textColor: Colors.white,
+                                );
+                              }
+                            }
+                          } else {
+                            Provider.of<AuthPreferencesProvider>(context,
+                                listen: false)
+                              ..enableSignIn(true)
+                              ..setDataUserAuth(result.data);
+                            Navigator.pushReplacementNamed(
+                                context, HomePage.route);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(result.message),
+                              ),
+                            );
+                          }
+                        },
+                      );
                     }
                   },
                   buttonColor: mainColor,
                   buttonText: 'Masuk',
                   textColor: Colors.white,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 25,
                 ),
                 Row(

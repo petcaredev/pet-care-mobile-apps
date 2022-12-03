@@ -16,7 +16,7 @@ class ClinicServiceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 5),
+      margin: const EdgeInsets.symmetric(vertical: 5),
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
           color: black25,
@@ -37,7 +37,7 @@ class ClinicServiceCard extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Padding(
@@ -56,7 +56,7 @@ class ClinicServiceCard extends StatelessWidget {
             color: black10,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 13,
               vertical: 8,
             ),

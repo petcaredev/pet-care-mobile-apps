@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pet_care_mobile_apps/main.dart';
 import 'package:pet_care_mobile_apps/pages/first_reservation_page.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
 import 'package:pet_care_mobile_apps/widgets/clinic_service_card_list.dart';
@@ -22,7 +21,7 @@ class DetailPage extends StatelessWidget {
         backgroundColor: Colors.white,
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
         ),
         title: Text(
           'Lilipoet Pet Clinic',
@@ -81,14 +80,14 @@ class DetailPage extends StatelessWidget {
                         height: 1,
                         color: black10,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Row(
                         children: [
                           ClipRRect(
                             borderRadius: BorderRadius.circular(9),
-                            child: Image(
+                            child: const Image(
                               image:
                                   NetworkImage('https://picsum.photos/200/300'),
                               width: 100,
@@ -96,7 +95,7 @@ class DetailPage extends StatelessWidget {
                               fit: BoxFit.fitWidth,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Expanded(
@@ -117,7 +116,7 @@ class DetailPage extends StatelessWidget {
                                     color: subColor50,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 5,
                                 ),
                                 Row(
@@ -127,7 +126,7 @@ class DetailPage extends StatelessWidget {
                                       size: 14,
                                       color: subColor50,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 5,
                                     ),
                                     Text(
@@ -146,7 +145,7 @@ class DetailPage extends StatelessWidget {
                                       size: 14,
                                       color: subColor50,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 5,
                                     ),
                                     Text(
@@ -167,7 +166,7 @@ class DetailPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Container(
@@ -182,7 +181,8 @@ class DetailPage extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -193,20 +193,20 @@ class DetailPage extends StatelessWidget {
                           color: subColor85,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Container(
                         height: 1,
                         color: black10,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       ListView(
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        children: [
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: const [
                           ClinicServiceCard(
                             serviceName: 'Grooming Sehat',
                             serviceDescription:

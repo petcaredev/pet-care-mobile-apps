@@ -42,7 +42,7 @@ class _ReservationCheckBoxState extends State<ReservationCheckBox> {
       checkboxShape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(5),
       ),
-      contentPadding: EdgeInsets.all(0),
+      contentPadding: const EdgeInsets.all(0),
       value: widget.value,
       onChanged: widget.onChanged,
     );

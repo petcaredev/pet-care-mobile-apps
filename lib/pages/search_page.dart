@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pet_care_mobile_apps/main.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
 
 class SearchPage extends StatefulWidget {
@@ -30,7 +29,7 @@ class _SearchPageState extends State<SearchPage> {
             weight: FontWeight.w400,
           ),
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.all(0),
+            contentPadding: const EdgeInsets.all(0),
             hintText: 'Cari klinik atau layanan',
             hintStyle: text11(
               weight: FontWeight.w400,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pet_care_mobile_apps/pages/login_page.dart';
 import 'package:pet_care_mobile_apps/providers/bottom_navigation_bar_provider.dart';
-import 'package:pet_care_mobile_apps/styles/styles.dart';
+import 'package:pet_care_mobile_apps/providers/auth_preferences_provider.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,6 +14,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final authPreferencesProvider =
+          Provider.of<AuthPreferencesProvider>(context, listen: false);
+      if (!authPreferencesProvider.isSignedIn) {
+        Navigator.pushReplacementNamed(context, LoginPage.route);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<BottomNavigationBarProvider>(

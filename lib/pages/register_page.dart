@@ -38,9 +38,9 @@ class _RegisterPageState extends State<RegisterPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Center(
+              const Center(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 50),
+                  padding: EdgeInsets.symmetric(vertical: 50),
                   child: Image(
                     image: AssetImage('images/colored_cat.png'),
                     height: 75,
@@ -58,7 +58,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       obscureText: false,
                       hintText: 'Nama lengkap Anda',
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     CustomTextFormField(
@@ -68,7 +68,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       obscureText: false,
                       hintText: 'Nomor telepon Anda',
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     CustomTextFormField(
@@ -78,7 +78,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       obscureText: false,
                       hintText: 'Alamat Anda',
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     CustomTextFormField(
@@ -88,7 +88,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       obscureText: false,
                       hintText: 'Email Anda',
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     CustomTextFormField(
@@ -110,11 +110,11 @@ class _RegisterPageState extends State<RegisterPage> {
                         color: otherColor85,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 10,
                         vertical: 8,
                       ),
@@ -146,7 +146,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         },
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     CommonButton(
@@ -156,7 +156,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             Navigator.pushReplacementNamed(
                                 context, LoginPage.route);
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
+                              const SnackBar(
                                 content: Text('Akun berhasil dibuat'),
                               ),
                             );
@@ -173,7 +173,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       buttonText: 'Daftar',
                       textColor: Colors.white,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 25,
                     ),
                     Row(

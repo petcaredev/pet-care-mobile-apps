@@ -45,7 +45,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               key: _changePasswordFormKey,
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   CustomTextFormField(
@@ -67,7 +67,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       color: otherColor85,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   CustomTextFormField(
@@ -89,7 +89,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       color: otherColor85,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   CustomTextFormField(
@@ -113,7 +113,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                       color: otherColor85,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   CommonButton(
@@ -124,7 +124,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                             if (newPasswordController.text ==
                                 newPasswordConfirmationController.text) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
+                                const SnackBar(
                                   content: Text('Password berhasil diubah'),
                                 ),
                               );
