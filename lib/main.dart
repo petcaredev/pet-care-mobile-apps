@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_care_mobile_apps/api/clinic_api.dart';
 import 'package:pet_care_mobile_apps/pages/change_password_page.dart';
 import 'package:pet_care_mobile_apps/pages/detail_page.dart';
 import 'package:pet_care_mobile_apps/pages/first_reservation_page.dart';
@@ -8,6 +9,7 @@ import 'package:pet_care_mobile_apps/pages/register_page.dart';
 import 'package:pet_care_mobile_apps/pages/reservation_detail_page.dart';
 import 'package:pet_care_mobile_apps/pages/second_reservation_page.dart';
 import 'package:pet_care_mobile_apps/providers/bottom_navigation_bar_provider.dart';
+import 'package:pet_care_mobile_apps/providers/clinic_list_provider.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
 import 'package:provider/provider.dart';
 
@@ -22,6 +24,11 @@ class PetCareApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider<ClinicListProvider>(
+          create: (context) => ClinicListProvider(
+            clinicAPI: ClinicAPI(),
+          ),
+        ),
         ChangeNotifierProvider<BottomNavigationBarProvider>(
           create: (context) => BottomNavigationBarProvider(),
         )

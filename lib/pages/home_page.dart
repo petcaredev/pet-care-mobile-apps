@@ -22,11 +22,6 @@ class _HomePageState extends State<HomePage> {
             onTap: (index) {
               page.currentPageIndex(index);
             },
-            // selectedIconTheme: IconThemeData(
-            //   color: Colors.white,
-            // ),
-            // fixedColor: Colors.black,
-            // selectedLabelStyle: TextStyle(color: Colors.white),
             showUnselectedLabels: false,
             currentIndex: page.currentIndex,
             items: const [
