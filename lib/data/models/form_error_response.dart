@@ -35,12 +35,12 @@ class Error {
     required this.location,
   });
 
-  String value;
-  String msg;
-  String param;
-  String location;
+  String? value;
+  String? msg;
+  String? param;
+  String? location;
 
-  factory Error.fromJson(Map<String, dynamic> json) => Error(
+  factory Error.fromJson(Map<String?, dynamic> json) => Error(
         value: json["value"],
         msg: json["msg"],
         param: json["param"],
