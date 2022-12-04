@@ -6,6 +6,7 @@ import 'package:pet_care_mobile_apps/styles/styles.dart';
 import 'package:pet_care_mobile_apps/widgets/common_button.dart';
 import 'package:pet_care_mobile_apps/widgets/custom_text_form_field.dart';
 import 'package:pet_care_mobile_apps/providers/auth_preferences_provider.dart';
+import 'package:pet_care_mobile_apps/providers/bottom_navigation_bar_provider.dart';
 import 'package:provider/provider.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -64,6 +65,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 listen: false)
                               ..enableSignIn(false)
                               ..clearDataUserAuth();
+                            Provider.of<BottomNavigationBarProvider>(context,
+                                    listen: false)
+                                .resetCurrentIndex();
                             Navigator.pushReplacementNamed(
                                 context, LoginPage.route);
                           },
@@ -123,6 +127,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
           ),
         ],
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         child: Padding(
