@@ -48,6 +48,7 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
                 msg:
                     'Silahkan pilih tanggal reservasi dan layanan yang Anda inginkan',
               );
+              break;
             }
           }
         },
