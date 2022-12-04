@@ -119,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
                             } else if (result is FormErrorResponse) {
                               for (var error in result.errors) {
                                 Fluttertoast.showToast(
-                                  msg: error.msg,
+                                  msg: error.msg!,
                                   backgroundColor: errorColor,
                                   fontSize: 14,
                                   textColor: Colors.white,
