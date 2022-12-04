@@ -77,7 +77,7 @@ class _ClinicListPageState extends State<ClinicListPage> {
             );
           } else if (provider.state == ResultState.error) {
             return Center(
-              child: Text(provider.message),
+              child: Text(provider.resultError.message),
             );
           } else {
             return const Center(child: Text('Maaaf, terjadi kesalahan'));

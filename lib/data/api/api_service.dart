@@ -59,7 +59,7 @@ class ApiService {
     }
   }
 
-  Future<ClinicModel> getAllClinics(String accessToken) async {
+  Future<dynamic> getAllClinics(String accessToken) async {
     final response = await http.get(
       Uri.parse('$baseUrl/clinics'),
       headers: {"Authorization": "Bearer $accessToken"},
@@ -67,6 +67,8 @@ class ApiService {
 
     if (response.statusCode == 200) {
       return ClinicModel.fromJson(json.decode(response.body));
+    } else if (response.statusCode == 403 || response.statusCode == 401) {
+      return ErrorResponse.fromJson(json.decode(response.body));
     } else {
       throw Exception('Maaf, terjadi kesalahan');
     }
