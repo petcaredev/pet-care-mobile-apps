@@ -30,8 +30,10 @@ class _ClinicListPageState extends State<ClinicListPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final authPreferencesProvider =
           Provider.of<AuthPreferencesProvider>(context, listen: false);
-      _accessToken = authPreferencesProvider.dataUserAuth['accessToken'];
-      loadClinicList();
+      if (authPreferencesProvider.isSignedIn) {
+        _accessToken = authPreferencesProvider.dataUserAuth['accessToken'];
+        loadClinicList();
+      }
     });
   }
 
@@ -53,6 +55,7 @@ class _ClinicListPageState extends State<ClinicListPage> {
           ),
         ],
         backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
       ),
       body: Consumer<ClinicProvider>(
         builder: (context, provider, _) {
