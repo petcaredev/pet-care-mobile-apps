@@ -18,4 +18,10 @@ class BottomNavigationBarProvider extends ChangeNotifier {
     currentIndex = page;
     notifyListeners();
   }
+
+  // reset current index
+  resetCurrentIndex() {
+    currentIndex = 0;
+    notifyListeners();
+  }
 }
