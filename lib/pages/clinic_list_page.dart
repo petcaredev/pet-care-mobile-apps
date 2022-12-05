@@ -16,11 +16,12 @@ class ClinicListPage extends StatefulWidget {
 class _ClinicListPageState extends State<ClinicListPage> {
   ClinicProvider? _clinicProvider;
   String? _accessToken;
+  String? _origin;
 
   void loadClinicList() {
     setState(() {
       _clinicProvider = Provider.of<ClinicProvider>(context, listen: false);
-      _clinicProvider!.fetchAllClinics(_accessToken!);
+      _clinicProvider!.fetchAllClinics(_accessToken!, _origin!);
     });
   }
 
@@ -32,6 +33,7 @@ class _ClinicListPageState extends State<ClinicListPage> {
           Provider.of<AuthPreferencesProvider>(context, listen: false);
       if (authPreferencesProvider.isSignedIn) {
         _accessToken = authPreferencesProvider.dataUserAuth['accessToken'];
+        _origin = authPreferencesProvider.dataUserAuth['address'];
         loadClinicList();
       }
     });
@@ -71,7 +73,7 @@ class _ClinicListPageState extends State<ClinicListPage> {
                   clinicPoster: clinic.posterPath,
                   clinicName: clinic.name,
                   clinicAddress: clinic.address,
-                  clinicDistance: 1,
+                  clinicDistance: clinic.distance,
                 );
               },
             );
