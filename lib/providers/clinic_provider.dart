@@ -22,11 +22,11 @@ class ClinicProvider extends ChangeNotifier {
 
   ResultState? get state => _state;
 
-  Future<dynamic> fetchAllClinics(String accessToken) async {
+  Future<dynamic> fetchAllClinics(String accessToken, String origin) async {
     try {
       _state = ResultState.loading;
       notifyListeners();
-      final response = await apiService.getAllClinics(accessToken);
+      final response = await apiService.getAllClinics(accessToken, origin);
       if (!response.error) {
         _state = ResultState.hasData;
         notifyListeners();
