@@ -28,7 +28,7 @@ class ApiService {
       }),
     );
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       return SignUpResponse.fromJson(json.decode(response.body));
     } else if (response.statusCode == 400) {
       return ErrorResponse.fromJson(json.decode(response.body));
@@ -59,9 +59,9 @@ class ApiService {
     }
   }
 
-  Future<dynamic> getAllClinics(String accessToken) async {
+  Future<dynamic> getAllClinics(String accessToken, String origin) async {
     final response = await http.get(
-      Uri.parse('$baseUrl/clinics'),
+      Uri.parse('$baseUrl/clinics?origin=$origin'),
       headers: {"Authorization": "Bearer $accessToken"},
     );
 
