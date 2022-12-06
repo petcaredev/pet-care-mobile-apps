@@ -5,11 +5,11 @@ import 'package:pet_care_mobile_apps/utils/result_state.dart';
 
 class ClinicDetailProvider extends ChangeNotifier {
   final ApiService apiService;
-  final int clinicId;
+  final ClinicDetailModel clinicDetailModel;
 
   ClinicDetailProvider({
     required this.apiService,
-    required this.clinicId,
+    required this.clinicDetailModel,
   });
 
   late ClinicDetailModel _clinicDetailModel;
