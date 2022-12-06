@@ -1,29 +1,30 @@
-import 'dart:async';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:pet_care_mobile_apps/data/api/api_service.dart';
-import 'package:pet_care_mobile_apps/data/models/clinic_model.dart';
+import 'package:pet_care_mobile_apps/data/models/clinic_detail_model.dart';
 import 'package:pet_care_mobile_apps/utils/result_state.dart';
 
-class ClinicProvider extends ChangeNotifier {
+class ClinicDetailProvider extends ChangeNotifier {
   final ApiService apiService;
+  final int clinicId;
 
-  ClinicProvider({required this.apiService});
+  ClinicDetailProvider({
+    required this.apiService,
+    required this.clinicId,
+  });
 
-  late ClinicModel _clinicModel;
-  ResultState? _state;
+  late ClinicDetailModel _clinicDetailModel;
+  late ResultState _state;
   String _message = '';
 
+  ClinicDetailModel get detail => _clinicDetailModel;
+  ResultState get state => _state;
   String get message => _message;
 
-  ClinicModel get list => _clinicModel;
-
-  ResultState? get state => _state;
-
-  Future<dynamic> fetchAllClinics(String accessToken) async {
+  Future fetchAllClinicDetail(String accessToken, int clinicId) async {
     try {
       _state = ResultState.loading;
       notifyListeners();
-      final response = await apiService.getAllClinics(accessToken);
+      final response = await apiService.getClinicDetail(accessToken, clinicId);
       if (response.error) {
         _state = ResultState.error;
         notifyListeners();
@@ -31,7 +32,7 @@ class ClinicProvider extends ChangeNotifier {
       } else {
         _state = ResultState.hasData;
         notifyListeners();
-        return _clinicModel = response;
+        return _clinicDetailModel = response;
       }
     } catch (e) {
       _state = ResultState.error;

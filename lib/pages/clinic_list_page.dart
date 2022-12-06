@@ -61,9 +61,9 @@ class _ClinicListPageState extends State<ClinicListPage> {
           } else if (provider.state == ResultState.hasData) {
             return ListView.builder(
               shrinkWrap: true,
-              itemCount: provider.result.data.length,
+              itemCount: provider.list.data.length,
               itemBuilder: (context, index) {
-                var clinic = provider.result.data[index];
+                var clinic = provider.list.data[index];
                 return ClinicCard(
                   clinicPoster: clinic.posterPath,
                   clinicName: clinic.name,
@@ -77,7 +77,7 @@ class _ClinicListPageState extends State<ClinicListPage> {
               child: Text(provider.message),
             );
           } else {
-            return const Center(child: Text('Maaaf, terjadi kesalahan'));
+            return const Center(child: Text('Maaf, terjadi kesalahan'));
           }
         },
       ),
