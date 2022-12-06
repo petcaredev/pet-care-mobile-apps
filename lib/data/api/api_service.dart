@@ -12,6 +12,34 @@ class ApiService {
   static const baseUrl =
       'https://pet-care-rest-api-production.up.railway.app/api';
 
+  Future<dynamic> signUp(String name, String email, String password,
+      String phone, String address, List<String> role) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/auth/signup'),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode({
+        'name': name,
+        'email': email,
+        'password': password,
+        'phone': phone,
+        'address': address,
+        'roles': role,
+      }),
+    );
+
+    if (response.statusCode == 201) {
+      return SignUpResponse.fromJson(json.decode(response.body));
+    } else if (response.statusCode == 400) {
+      return ErrorResponse.fromJson(json.decode(response.body));
+    } else if (response.statusCode == 422) {
+      return FormErrorResponse.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Maaf, terjadi kesalahan');
+    }
+  }
+
   Future<dynamic> signIn(String email, String password) async {
     final response = await http.post(
       Uri.parse('$baseUrl/auth/signin'),
@@ -32,14 +60,16 @@ class ApiService {
     }
   }
 
-  Future<ClinicModel> getAllClinics(String accessToken) async {
+  Future<dynamic> getAllClinics(String accessToken, String origin) async {
     final response = await http.get(
-      Uri.parse('$baseUrl/clinics'),
+      Uri.parse('$baseUrl/clinics?origin=$origin'),
       headers: {"Authorization": "Bearer $accessToken"},
     );
 
     if (response.statusCode == 200) {
       return ClinicModel.fromJson(json.decode(response.body));
+    } else if (response.statusCode == 403 || response.statusCode == 401) {
+      return ErrorResponse.fromJson(json.decode(response.body));
     } else {
       throw Exception('Maaf, terjadi kesalahan');
     }

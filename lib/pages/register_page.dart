@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:pet_care_mobile_apps/pages/home_page.dart';
 import 'package:pet_care_mobile_apps/pages/login_page.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
 import 'package:pet_care_mobile_apps/widgets/common_button.dart';
 import 'package:pet_care_mobile_apps/widgets/custom_text_form_field.dart';
+import 'package:pet_care_mobile_apps/data/api/api_service.dart';
+import 'package:pet_care_mobile_apps/providers/auth_provider.dart';
+import 'package:pet_care_mobile_apps/providers/auth_preferences_provider.dart';
+import 'package:pet_care_mobile_apps/data/models/error_response.dart';
+import 'package:pet_care_mobile_apps/data/models/form_error_response.dart';
+import 'package:provider/provider.dart';
 
 const List<String> userRole = <String>['Pengguna', 'Klinik'];
 
@@ -27,6 +34,19 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController addressController = TextEditingController();
   TextEditingController userEmailController = TextEditingController();
   TextEditingController userPasswordController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final authPreferencesProvider =
+          Provider.of<AuthPreferencesProvider>(context, listen: false);
+      if (authPreferencesProvider.isSignedIn) {
+        Navigator.pushReplacementNamed(context, HomePage.route);
+      }
+      userRoleValue = 'Pengguna';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -152,21 +172,43 @@ class _RegisterPageState extends State<RegisterPage> {
                     CommonButton(
                       onPressed: () {
                         if (_registerFormKey.currentState!.validate()) {
-                          if (userPasswordController.text.length >= 8) {
-                            Navigator.pushReplacementNamed(
-                                context, LoginPage.route);
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('Akun berhasil dibuat'),
-                              ),
-                            );
-                          } else {
-                            Fluttertoast.showToast(
-                              msg: 'Password minimal 8 karakter',
-                              backgroundColor: errorColor,
-                              fontSize: 14,
-                            );
-                          }
+                          final userRolePicked =
+                              userRoleValue == 'Pengguna' ? 'user' : 'clinic';
+                          AuthProvider(apiService: ApiService()).signUp(
+                              fullNameController.text,
+                              userEmailController.text,
+                              userPasswordController.text,
+                              phoneController.text,
+                              addressController.text,
+                              [userRolePicked]).then((result) {
+                            if (result.error) {
+                              if (result is ErrorResponse) {
+                                Fluttertoast.showToast(
+                                  msg: result.message,
+                                  backgroundColor: errorColor,
+                                  fontSize: 14,
+                                  textColor: Colors.white,
+                                );
+                              } else if (result is FormErrorResponse) {
+                                for (var error in result.errors) {
+                                  Fluttertoast.showToast(
+                                    msg: error.msg!,
+                                    backgroundColor: errorColor,
+                                    fontSize: 14,
+                                    textColor: Colors.white,
+                                  );
+                                }
+                              }
+                            } else {
+                              Navigator.pushReplacementNamed(
+                                  context, LoginPage.route);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(result.message),
+                                ),
+                              );
+                            }
+                          });
                         }
                       },
                       buttonColor: mainColor,

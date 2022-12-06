@@ -28,6 +28,35 @@ class AuthProvider extends ChangeNotifier {
 
   ResultState get state => _state;
 
+  Future<dynamic> signUp(String name, String email, String password,
+      String phone, String address, List<String> role) async {
+    try {
+      _state = ResultState.loading;
+      notifyListeners();
+      final response =
+          await apiService.signUp(name, email, password, phone, address, role);
+      if (response.error) {
+        if (response is ErrorResponse) {
+          _state = ResultState.error;
+          notifyListeners();
+          return _errorResponse = response;
+        } else if (response is FormErrorResponse) {
+          _state = ResultState.error;
+          notifyListeners();
+          return _formErrorResponse = response;
+        }
+      } else {
+        _state = ResultState.hasData;
+        notifyListeners();
+        return _signUpResponse = response;
+      }
+    } catch (e) {
+      _state = ResultState.error;
+      notifyListeners();
+      return _message = 'Error: $e';
+    }
+  }
+
   Future<dynamic> signIn(String email, String password) async {
     try {
       _state = ResultState.loading;

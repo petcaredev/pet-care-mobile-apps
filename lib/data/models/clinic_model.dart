@@ -40,6 +40,7 @@ class Data {
     required this.address,
     required this.posterPath,
     required this.phone,
+    required this.distance,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -49,6 +50,7 @@ class Data {
   String address;
   String posterPath;
   String phone;
+  String distance;
   DateTime createdAt;
   DateTime updatedAt;
 
@@ -58,6 +60,7 @@ class Data {
         address: json["address"],
         posterPath: json["posterPath"],
         phone: json["phone"],
+        distance: json["distance"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
       );
@@ -68,6 +71,7 @@ class Data {
         "address": address,
         "posterPath": posterPath,
         "phone": phone,
+        "distance": distance,
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),
       };

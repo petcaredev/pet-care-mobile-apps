@@ -16,11 +16,12 @@ class ClinicListPage extends StatefulWidget {
 class _ClinicListPageState extends State<ClinicListPage> {
   ClinicProvider? _clinicProvider;
   String? _accessToken;
+  String? _origin;
 
   void loadClinicList() {
     setState(() {
       _clinicProvider = Provider.of<ClinicProvider>(context, listen: false);
-      _clinicProvider!.fetchAllClinics(_accessToken!);
+      _clinicProvider!.fetchAllClinics(_accessToken!, _origin!);
     });
   }
 
@@ -30,8 +31,11 @@ class _ClinicListPageState extends State<ClinicListPage> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final authPreferencesProvider =
           Provider.of<AuthPreferencesProvider>(context, listen: false);
-      _accessToken = authPreferencesProvider.dataUserAuth['accessToken'];
-      loadClinicList();
+      if (authPreferencesProvider.isSignedIn) {
+        _accessToken = authPreferencesProvider.dataUserAuth['accessToken'];
+        _origin = authPreferencesProvider.dataUserAuth['address'];
+        loadClinicList();
+      }
     });
   }
 
@@ -53,6 +57,7 @@ class _ClinicListPageState extends State<ClinicListPage> {
           ),
         ],
         backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
       ),
       body: Consumer<ClinicProvider>(
         builder: (context, provider, _) {
@@ -61,20 +66,20 @@ class _ClinicListPageState extends State<ClinicListPage> {
           } else if (provider.state == ResultState.hasData) {
             return ListView.builder(
               shrinkWrap: true,
-              itemCount: provider.list.data.length,
+              itemCount: provider.result.data.length,
               itemBuilder: (context, index) {
-                var clinic = provider.list.data[index];
+                var clinic = provider.result.data[index];
                 return ClinicCard(
                   clinicPoster: clinic.posterPath,
                   clinicName: clinic.name,
                   clinicAddress: clinic.address,
-                  clinicDistance: 1,
+                  clinicDistance: clinic.distance,
                 );
               },
             );
           } else if (provider.state == ResultState.error) {
             return Center(
-              child: Text(provider.message),
+              child: Text(provider.resultError.message),
             );
           } else {
             return const Center(child: Text('Maaf, terjadi kesalahan'));

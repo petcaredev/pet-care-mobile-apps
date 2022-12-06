@@ -7,7 +7,7 @@ class ClinicCard extends StatelessWidget {
   final String clinicPoster;
   final String clinicName;
   final String clinicAddress;
-  final double clinicDistance;
+  final String clinicDistance;
 
   const ClinicCard({
     super.key,
@@ -42,17 +42,11 @@ class ClinicCard extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(9),
-                // child: Image(
-                //   image: NetworkImage(clinicPoster),
-                //   width: 100,
-                //   height: 66.67,
-                //   fit: BoxFit.fitWidth,
-                // ),
                 child: CachedNetworkImage(
                   imageUrl: clinicPoster,
                   width: 100,
                   height: 66.67,
-                  fit: BoxFit.fitWidth,
+                  fit: BoxFit.cover,
                   placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),
                   ),
@@ -103,7 +97,7 @@ class ClinicCard extends StatelessWidget {
                         color: black50,
                       ),
                       Text(
-                        '$clinicDistance km dari Anda',
+                        '$clinicDistance dari Anda',
                         style: text9(
                           weight: FontWeight.w600,
                           color: subColor75,
