@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_care_mobile_apps/data/reservation_data.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
+import 'package:pet_care_mobile_apps/widgets/single_button_navigation_bar.dart';
 
 class ReservationDetailPage extends StatelessWidget {
   static const route = '/reservation-detail-page';
@@ -29,6 +30,10 @@ class ReservationDetailPage extends StatelessWidget {
           ),
         ),
         centerTitle: true,
+      ),
+      bottomNavigationBar: SingleButtonNavigationBar(
+        onPressed: () {},
+        buttonText: 'Reservasi Sekarang',
       ),
       body: SingleChildScrollView(
         child: Column(

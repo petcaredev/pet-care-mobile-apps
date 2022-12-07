@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_care_mobile_apps/data/account_data.dart';
 import 'package:pet_care_mobile_apps/data/reservation_data.dart';
+import 'package:pet_care_mobile_apps/pages/payment_method_page.dart';
 import 'package:pet_care_mobile_apps/pages/reservation_detail_page.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
 import 'package:pet_care_mobile_apps/widgets/custom_text_form_field.dart';
@@ -44,10 +45,10 @@ class _SecondReservationPageState extends State<SecondReservationPage> {
       bottomNavigationBar: SingleButtonNavigationBar(
         onPressed: () {
           if (_reservationFormKey.currentState!.validate()) {
-            Navigator.pushNamed(context, ReservationDetailPage.route);
+            Navigator.pushNamed(context, PaymentMethodPage.route);
           }
         },
-        buttonText: 'Selanjutnya',
+        buttonText: 'Pilih Metode Pembayaran',
       ),
       body: SingleChildScrollView(
         child: Padding(

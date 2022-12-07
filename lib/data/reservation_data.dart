@@ -10,6 +10,10 @@ TextEditingController petNameController = TextEditingController();
 TextEditingController petTypeController = TextEditingController();
 TextEditingController optionalNoteController = TextEditingController();
 
+enum PaymentMethod { cash, transfer }
+
+PaymentMethod? paymentMethod;
+
 class Service {
   final String serviceName;
   final int servicePrice;

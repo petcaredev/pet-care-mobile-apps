@@ -4,7 +4,8 @@ import 'package:pet_care_mobile_apps/data/reservation_data.dart';
 import 'package:pet_care_mobile_apps/pages/second_reservation_page.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
 import 'package:pet_care_mobile_apps/utils/multi_argument.dart';
-import 'package:pet_care_mobile_apps/widgets/detail_clinic_card.dart';
+import 'package:pet_care_mobile_apps/widgets/common_container.dart';
+import 'package:pet_care_mobile_apps/widgets/clinic_detail_card.dart';
 import 'package:pet_care_mobile_apps/widgets/reservation_checkbox.dart';
 import 'package:pet_care_mobile_apps/widgets/single_button_navigation_bar.dart';
 
@@ -64,7 +65,7 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
           padding: const EdgeInsets.all(12),
           child: Column(
             children: [
-              DetailClinicCard(
+              ClinicDetailCard(
                 clinicName: 'clinicName',
                 clinicAddress:
                     'Jl. Kyai Mojo No.18A, Bumijo, Kec. Jetis, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55231',
@@ -141,89 +142,29 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
               const SizedBox(
                 height: 15,
               ),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 15,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    width: 1,
-                    color: black15,
-                  ),
-                  borderRadius: BorderRadius.circular(7),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Pilih Layanan',
-                      style: text13(
-                        weight: FontWeight.w500,
-                        color: Colors.black,
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      height: 1,
-                      color: black10,
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    // ReservationCheckBox(
-                    //   serviceName: 'Grooming Sehat',
-                    //   servicePrice: 35000,
-                    //   value: service![0],
-                    //   onChanged: (value) {
-                    //     setState(() {
-                    //       service![0] = value!;
-                    //     });
-                    //   },
-                    // ),
-                    // ReservationCheckBox(
-                    //   serviceName: 'Grooming Kering',
-                    //   servicePrice: 25000,
-                    //   value: service![1],
-                    //   onChanged: (value) {
-                    //     setState(() {
-                    //       service![1] = value!;
-                    //     });
-                    //   },
-                    // ),
-                    // ReservationCheckBox(
-                    //   serviceName: 'Trimming',
-                    //   servicePrice: 15000,
-                    //   value: service![2],
-                    //   onChanged: (value) {
-                    //     setState(() {
-                    //       service![2] = value!;
-                    //     });
-                    //   },
-                    // ),
-                    ListView.builder(
-                      physics: NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: serviceList.length,
-                      itemBuilder: (context, index) {
-                        final Service serviceItem = serviceList[index];
+              CommonContainer(
+                title: 'Pilih Layanan',
+                widgets: [
+                  ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: serviceList.length,
+                    itemBuilder: (context, index) {
+                      final Service serviceItem = serviceList[index];
 
-                        return ReservationCheckBox(
-                          serviceName: serviceItem.serviceName,
-                          servicePrice: serviceItem.servicePrice,
-                          value: serviceItem.isChecked,
-                          onChanged: (value) {
-                            setState(() {
-                              serviceItem.isChecked = value!;
-                            });
-                          },
-                        );
-                      },
-                    ),
-                  ],
-                ),
+                      return ReservationCheckBox(
+                        serviceName: serviceItem.serviceName,
+                        servicePrice: serviceItem.servicePrice,
+                        value: serviceItem.isChecked,
+                        onChanged: (value) {
+                          setState(() {
+                            serviceItem.isChecked = value!;
+                          });
+                        },
+                      );
+                    },
+                  ),
+                ],
               ),
             ],
           ),

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
 
-class DetailClinicCard extends StatelessWidget {
+class ClinicDetailCard extends StatelessWidget {
   final String clinicName;
   final String clinicAddress;
   final double clinicDistance;
   final String clinicPhone;
   final String clinicPoster;
 
-  const DetailClinicCard({
+  const ClinicDetailCard({
     Key? key,
     required this.clinicName,
     required this.clinicAddress,
@@ -21,13 +21,10 @@ class DetailClinicCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: black25,
-            blurRadius: 4,
-            blurStyle: BlurStyle.outer,
-          )
-        ],
+        border: Border.all(
+          width: 1,
+          color: black15,
+        ),
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: Padding(
