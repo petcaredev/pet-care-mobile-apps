@@ -11,10 +11,10 @@ class PaymentMethodPage extends StatefulWidget {
   const PaymentMethodPage({super.key});
 
   @override
-  State<PaymentMethodPage> createState() => paymentMethodPageState();
+  State<PaymentMethodPage> createState() => PaymentMethodPageState();
 }
 
-class paymentMethodPageState extends State<PaymentMethodPage> {
+class PaymentMethodPageState extends State<PaymentMethodPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
