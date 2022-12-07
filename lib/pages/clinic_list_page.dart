@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pet_care_mobile_apps/providers/auth_preferences_provider.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
 import 'package:pet_care_mobile_apps/providers/clinic_provider.dart';
 import 'package:pet_care_mobile_apps/widgets/clinic_card_list.dart';
@@ -14,31 +13,6 @@ class ClinicListPage extends StatefulWidget {
 }
 
 class _ClinicListPageState extends State<ClinicListPage> {
-  ClinicProvider? _clinicProvider;
-  String? _accessToken;
-  String? _origin;
-
-  void loadClinicList() {
-    setState(() {
-      _clinicProvider = Provider.of<ClinicProvider>(context, listen: false);
-      _clinicProvider!.fetchAllClinics(_accessToken!, _origin!);
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final authPreferencesProvider =
-          Provider.of<AuthPreferencesProvider>(context, listen: false);
-      if (authPreferencesProvider.isSignedIn) {
-        _accessToken = authPreferencesProvider.dataUserAuth['accessToken'];
-        _origin = authPreferencesProvider.dataUserAuth['address'];
-        loadClinicList();
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,6 +44,7 @@ class _ClinicListPageState extends State<ClinicListPage> {
               itemBuilder: (context, index) {
                 var clinic = provider.result.data[index];
                 return ClinicCard(
+                  clinicId: clinic.id,
                   clinicPoster: clinic.posterPath,
                   clinicName: clinic.name,
                   clinicAddress: clinic.address,

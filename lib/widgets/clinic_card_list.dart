@@ -4,6 +4,7 @@ import 'package:pet_care_mobile_apps/pages/clinic_detail_page.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
 
 class ClinicCard extends StatelessWidget {
+  final int clinicId;
   final String clinicPoster;
   final String clinicName;
   final String clinicAddress;
@@ -11,6 +12,7 @@ class ClinicCard extends StatelessWidget {
 
   const ClinicCard({
     super.key,
+    required this.clinicId,
     required this.clinicPoster,
     required this.clinicName,
     required this.clinicAddress,
@@ -21,7 +23,7 @@ class ClinicCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, DetailPage.route);
+        Navigator.pushNamed(context, DetailPage.route, arguments: clinicId);
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 7, horizontal: 12),
@@ -67,12 +69,12 @@ class ClinicCard extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 7,
                   ),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.local_hospital_outlined,
                         size: 14,
                         color: Colors.black,
@@ -89,12 +91,12 @@ class ClinicCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 7,
                   ),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.navigation,
                         size: 14,
                         color: Colors.black,
