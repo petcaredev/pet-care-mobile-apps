@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_care_mobile_apps/pages/change_password_page.dart';
-import 'package:pet_care_mobile_apps/pages/detail_page.dart';
+import 'package:pet_care_mobile_apps/pages/clinic_detail_page.dart';
 import 'package:pet_care_mobile_apps/pages/first_reservation_page.dart';
 import 'package:pet_care_mobile_apps/pages/home_page.dart';
 import 'package:pet_care_mobile_apps/pages/login_page.dart';
@@ -74,8 +74,7 @@ class PetCareApp extends StatelessWidget {
               // id: ModalRoute.of(context)?.settings.arguments as String,
               ),
           FirstReservationPage.route: (context) => const FirstReservationPage(),
-          SecondReservationPage.route: (context) =>
-              const SecondReservationPage(),
+          SecondReservationPage.route: (context) => SecondReservationPage(),
           ReservationDetailPage.route: (context) =>
               const ReservationDetailPage(),
           ChangePasswordPage.route: (context) => const ChangePasswordPage(),

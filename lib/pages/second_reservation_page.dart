@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_care_mobile_apps/data/account_data.dart';
+import 'package:pet_care_mobile_apps/data/reservation_data.dart';
 import 'package:pet_care_mobile_apps/pages/reservation_detail_page.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
 import 'package:pet_care_mobile_apps/widgets/custom_text_form_field.dart';
@@ -17,12 +18,6 @@ class SecondReservationPage extends StatefulWidget {
 class _SecondReservationPageState extends State<SecondReservationPage> {
   final _reservationFormKey = GlobalKey<FormState>();
 
-  TextEditingController fullNameController =
-      TextEditingController(text: fullName);
-  TextEditingController petNameController = TextEditingController();
-  TextEditingController petTypeController = TextEditingController();
-  TextEditingController optionalNoteController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,14 +27,19 @@ class _SecondReservationPageState extends State<SecondReservationPage> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(Icons.arrow_back),
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Color(0xFF545454),
+          ),
         ),
         title: Text(
           'Reservasi',
-          style: text13(
-            weight: FontWeight.w400,
+          style: text14(
+            weight: FontWeight.w500,
+            color: Colors.black,
           ),
         ),
+        centerTitle: true,
       ),
       bottomNavigationBar: SingleButtonNavigationBar(
         onPressed: () {

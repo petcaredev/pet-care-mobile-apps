@@ -32,8 +32,8 @@ class ClinicServiceCard extends StatelessWidget {
             child: Text(
               serviceName,
               style: text11(
-                weight: FontWeight.w500,
-                color: subColor85,
+                weight: FontWeight.w400,
+                color: Colors.black,
               ),
             ),
           ),
@@ -45,8 +45,8 @@ class ClinicServiceCard extends StatelessWidget {
             child: Text(
               serviceDescription,
               style: text10(
-                weight: FontWeight.w400,
-                color: subColor85,
+                weight: FontWeight.w300,
+                color: Colors.black,
               ),
               textAlign: TextAlign.justify,
             ),
@@ -66,15 +66,15 @@ class ClinicServiceCard extends StatelessWidget {
                 Text(
                   'Biaya',
                   style: text11(
-                    weight: FontWeight.w500,
-                    color: subColor85,
+                    weight: FontWeight.w400,
+                    color: Colors.black,
                   ),
                 ),
                 Text(
                   'Rp $serviceFee',
                   style: text11(
-                    weight: FontWeight.w500,
-                    color: subColor85,
+                    weight: FontWeight.w400,
+                    color: Colors.black,
                   ),
                 )
               ],

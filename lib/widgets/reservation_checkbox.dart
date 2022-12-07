@@ -27,14 +27,14 @@ class _ReservationCheckBoxState extends State<ReservationCheckBox> {
         widget.serviceName,
         style: text13(
           weight: FontWeight.w400,
-          color: subColor85,
+          color: Colors.black,
         ),
       ),
       secondary: Text(
         'Rp ${widget.servicePrice}',
         style: text13(
           weight: FontWeight.w400,
-          color: subColor85,
+          color: Colors.black,
         ),
       ),
       controlAffinity: ListTileControlAffinity.leading,
