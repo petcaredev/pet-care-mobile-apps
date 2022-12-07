@@ -75,6 +75,22 @@ class ApiService {
     }
   }
 
+  Future<dynamic> getClinicDetail(
+      String accessToken, String origin, int clinicId) async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/clinics/$clinicId?origin=$origin'),
+      headers: {"Authorization": "Bearer $accessToken"},
+    );
+
+    if (response.statusCode == 200) {
+      return ClinicDetailModel.fromJson(json.decode(response.body));
+    } else if (response.statusCode == 403 || response.statusCode == 401) {
+      return ErrorResponse.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Maaf, terjadi kesalahan');
+    }
+  }
+
   Future<dynamic> getUserProfile(String accessToken, int id) async {
     final response = await http.get(
       Uri.parse('$baseUrl/users/$id'),
@@ -85,20 +101,6 @@ class ApiService {
       return ProfileResponse.fromJson(json.decode(response.body));
     } else if (response.statusCode == 404) {
       return ErrorResponse.fromJson(json.decode(response.body));
-    } else {
-      throw Exception('Maaf, terjadi kesalahan');
-    }
-  }
-
-  Future<ClinicDetailModel> getClinicDetail(
-      String accessToken, int clinicId) async {
-    final response = await http.get(
-      Uri.parse('$baseUrl/clinics/$clinicId'),
-      headers: {"Authorization": "Bearer $accessToken"},
-    );
-
-    if (response.statusCode == 200) {
-      return ClinicDetailModel.fromJson(json.decode(response.body));
     } else {
       throw Exception('Maaf, terjadi kesalahan');
     }
