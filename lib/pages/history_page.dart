@@ -18,17 +18,19 @@ class HistoryPage extends StatelessWidget {
             style: text13(weight: FontWeight.w400),
           ),
           bottom: TabBar(
-              labelColor: mainColor,
-              unselectedLabelColor: Colors.black,
-              indicatorColor: mainColor,
-              tabs: const [
-                Tab(
-                  text: 'Proses',
-                ),
-                Tab(
-                  text: 'Selesai',
-                ),
-              ]),
+            labelColor: mainColor,
+            unselectedLabelColor: Colors.black,
+            indicatorColor: mainColor,
+            tabs: const [
+              Tab(
+                text: 'Proses',
+              ),
+              Tab(
+                text: 'Selesai',
+              ),
+            ],
+          ),
+          automaticallyImplyLeading: false,
         ),
         body: TabBarView(children: [ProcessPage(), DonePage()]),
       ),

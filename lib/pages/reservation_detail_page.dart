@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet_care_mobile_apps/data/reservation_data.dart';
+import 'package:pet_care_mobile_apps/pages/reservation_success_page.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
 import 'package:pet_care_mobile_apps/widgets/common_container.dart';
 import 'package:pet_care_mobile_apps/widgets/single_button_navigation_bar.dart';
@@ -33,7 +34,9 @@ class ReservationDetailPage extends StatelessWidget {
         centerTitle: true,
       ),
       bottomNavigationBar: SingleButtonNavigationBar(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, ReservationSuccessPage.route);
+        },
         buttonText: 'Reservasi Sekarang',
       ),
       body: SingleChildScrollView(
@@ -220,55 +223,58 @@ class ReservationDetailPage extends StatelessWidget {
               SizedBox(
                 height: 15,
               ),
-              CommonContainer(title: 'Metode Pembayaran', widgets: [
-                Builder(
-                  builder: (context) {
-                    if (paymentMethod == PaymentMethod.cash) {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Tunai',
-                            style: text12(
-                              weight: FontWeight.w500,
-                              color: Colors.black,
+              CommonContainer(
+                title: 'Metode Pembayaran',
+                widgets: [
+                  Builder(
+                    builder: (context) {
+                      if (paymentMethod == PaymentMethod.cash) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Tunai',
+                              style: text12(
+                                weight: FontWeight.w500,
+                                color: Colors.black,
+                              ),
                             ),
-                          ),
-                          Text(
-                            'Kamu harus membayar secara tunai langsung di klinik dengan memberikan informasi reservasi yang didapatkan setelah reservasi berhasil dibuat.',
-                            textAlign: TextAlign.justify,
-                            style: text11(
-                              weight: FontWeight.w400,
-                              color: Colors.black,
+                            Text(
+                              'Kamu harus membayar secara tunai langsung di klinik dengan memberikan informasi reservasi yang didapatkan setelah reservasi berhasil dibuat.',
+                              textAlign: TextAlign.justify,
+                              style: text11(
+                                weight: FontWeight.w400,
+                                color: Colors.black,
+                              ),
+                            )
+                          ],
+                        );
+                      } else {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Non Tunai',
+                              style: text12(
+                                weight: FontWeight.w500,
+                                color: Colors.black,
+                              ),
                             ),
-                          )
-                        ],
-                      );
-                    } else {
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Non Tunai',
-                            style: text12(
-                              weight: FontWeight.w500,
-                              color: Colors.black,
-                            ),
-                          ),
-                          Text(
-                            'Setelah reservasi berhasil dibuat, segera bayar biaya reservasi dan upload bukti pembayarannya',
-                            textAlign: TextAlign.justify,
-                            style: text11(
-                              weight: FontWeight.w400,
-                              color: Colors.black,
-                            ),
-                          )
-                        ],
-                      );
-                    }
-                  },
-                )
-              ]),
+                            Text(
+                              'Setelah reservasi berhasil dibuat, segera bayar biaya reservasi dan upload bukti pembayarannya',
+                              textAlign: TextAlign.justify,
+                              style: text11(
+                                weight: FontWeight.w400,
+                                color: Colors.black,
+                              ),
+                            )
+                          ],
+                        );
+                      }
+                    },
+                  )
+                ],
+              ),
             ],
           ),
         ),

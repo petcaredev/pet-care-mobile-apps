@@ -7,6 +7,7 @@ import 'package:pet_care_mobile_apps/pages/login_page.dart';
 import 'package:pet_care_mobile_apps/pages/payment_method_page.dart';
 import 'package:pet_care_mobile_apps/pages/register_page.dart';
 import 'package:pet_care_mobile_apps/pages/reservation_detail_page.dart';
+import 'package:pet_care_mobile_apps/pages/reservation_success_page.dart';
 import 'package:pet_care_mobile_apps/pages/second_reservation_page.dart';
 import 'package:pet_care_mobile_apps/providers/bottom_navigation_bar_provider.dart';
 import 'package:pet_care_mobile_apps/data/api/api_service.dart';
@@ -80,6 +81,7 @@ class PetCareApp extends StatelessWidget {
           PaymentMethodPage.route: (context) => const PaymentMethodPage(),
           ReservationDetailPage.route: (context) =>
               const ReservationDetailPage(),
+              ReservationSuccessPage.route:(context) => ReservationSuccessPage(),
           ChangePasswordPage.route: (context) => const ChangePasswordPage(),
           // SearchPage.route: (context) => SearchPage(),
           // HistoryPage.route: (context) => HistoryPage(),
