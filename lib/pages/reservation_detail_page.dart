@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet_care_mobile_apps/data/reservation_data.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
+import 'package:pet_care_mobile_apps/widgets/common_container.dart';
 import 'package:pet_care_mobile_apps/widgets/single_button_navigation_bar.dart';
 
 class ReservationDetailPage extends StatelessWidget {
@@ -36,47 +37,23 @@ class ReservationDetailPage extends StatelessWidget {
         buttonText: 'Reservasi Sekarang',
       ),
       body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              height: 15,
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(
-                horizontal: 12,
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: 15,
-                vertical: 10,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 4,
-                    color: black25,
-                  ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+        child: Padding(
+          padding: const EdgeInsets.all(12),
+          child: Column(
+            children: [
+              CommonContainer(
+                title: 'Informasi',
+                widgets: [
                   Text(
-                    'Informasi',
-                    style: text13(
+                    'Nama Klinik',
+                    style: text12(
                       weight: FontWeight.w500,
                       color: Colors.black,
                     ),
                   ),
-                  Container(
-                    height: 1,
-                    margin: EdgeInsets.symmetric(vertical: 7),
-                    color: black10,
-                  ),
                   Text(
-                    'Nama Klinik : Lilipoet Pet Clinic',
-                    style: text12(
+                    'Lilipoet Pet Clinic',
+                    style: text11(
                       weight: FontWeight.w400,
                       color: Colors.black,
                     ),
@@ -85,8 +62,15 @@ class ReservationDetailPage extends StatelessWidget {
                     height: 9,
                   ),
                   Text(
-                    "Nama Pemilik : ${fullNameController.text}",
+                    "Nama Pemilik",
                     style: text12(
+                      weight: FontWeight.w500,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Text(
+                    fullNameController.text,
+                    style: text11(
                       weight: FontWeight.w400,
                       color: Colors.black,
                     ),
@@ -95,51 +79,74 @@ class ReservationDetailPage extends StatelessWidget {
                     height: 9,
                   ),
                   Text(
-                    "Nama Hewan : ${petNameController.text}",
+                    'Nama Hewan',
                     style: text12(
-                      weight: FontWeight.w400,
-                      color: Colors.black,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Container(
-              margin: EdgeInsets.symmetric(
-                horizontal: 12,
-              ),
-              padding: EdgeInsets.symmetric(
-                horizontal: 15,
-                vertical: 10,
-              ),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(8),
-                boxShadow: [
-                  BoxShadow(
-                    blurRadius: 4,
-                    color: black25,
-                  ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Layanan',
-                    style: text13(
                       weight: FontWeight.w500,
                       color: Colors.black,
                     ),
                   ),
-                  Container(
-                    height: 1,
-                    margin: EdgeInsets.symmetric(vertical: 7),
-                    color: black10,
+                  Text(
+                    petNameController.text,
+                    style: text11(
+                      weight: FontWeight.w400,
+                      color: Colors.black,
+                    ),
                   ),
+                  SizedBox(
+                    height: 9,
+                  ),
+                  Text(
+                    'Jenis Hewan',
+                    style: text12(
+                      weight: FontWeight.w500,
+                      color: Colors.black,
+                    ),
+                  ),
+                  Text(
+                    petTypeController.text,
+                    style: text11(
+                      weight: FontWeight.w400,
+                      color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 9,
+                  ),
+                  Builder(
+                    builder: (context) {
+                      if (optionalNoteController.text.isNotEmpty) {
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Catatan Tambahan',
+                              style: text12(
+                                weight: FontWeight.w500,
+                                color: Colors.black,
+                              ),
+                            ),
+                            Text(
+                              optionalNoteController.text,
+                              style: text11(
+                                weight: FontWeight.w400,
+                                color: Colors.black,
+                              ),
+                            )
+                          ],
+                        );
+                      } else {
+                        return Container();
+                      }
+                    },
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              CommonContainer(
+                title: 'Layanan',
+                widgets: [
                   ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
@@ -210,8 +217,60 @@ class ReservationDetailPage extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-          ],
+              SizedBox(
+                height: 15,
+              ),
+              CommonContainer(title: 'Metode Pembayaran', widgets: [
+                Builder(
+                  builder: (context) {
+                    if (paymentMethod == PaymentMethod.cash) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Tunai',
+                            style: text12(
+                              weight: FontWeight.w500,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            'Kamu harus membayar secara tunai langsung di klinik dengan memberikan informasi reservasi yang didapatkan setelah reservasi berhasil dibuat.',
+                            textAlign: TextAlign.justify,
+                            style: text11(
+                              weight: FontWeight.w400,
+                              color: Colors.black,
+                            ),
+                          )
+                        ],
+                      );
+                    } else {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'Non Tunai',
+                            style: text12(
+                              weight: FontWeight.w500,
+                              color: Colors.black,
+                            ),
+                          ),
+                          Text(
+                            'Setelah reservasi berhasil dibuat, segera bayar biaya reservasi dan upload bukti pembayarannya',
+                            textAlign: TextAlign.justify,
+                            style: text11(
+                              weight: FontWeight.w400,
+                              color: Colors.black,
+                            ),
+                          )
+                        ],
+                      );
+                    }
+                  },
+                )
+              ]),
+            ],
+          ),
         ),
       ),
     );

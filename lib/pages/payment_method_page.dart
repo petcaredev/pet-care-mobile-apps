@@ -87,7 +87,7 @@ class PaymentMethodPageState extends State<PaymentMethodPage> {
                                   ),
                                 ),
                                 Text(
-                                  'Kamu dapat membayar secara tunai di klinik dengan menginformasikan ID Transaksi.',
+                                  'Kamu dapat membayar secara tunai di klinik dengan memberikan informasi reservasi.',
                                   style: text11(
                                     weight: FontWeight.w300,
                                     color: Colors.black,
