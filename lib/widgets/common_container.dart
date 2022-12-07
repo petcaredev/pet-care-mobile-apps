@@ -7,7 +7,7 @@ class CommonContainer extends StatelessWidget {
   final MainAxisAlignment mainAxisAlignment;
   final CrossAxisAlignment crossAxisAlignment;
 
-  CommonContainer({
+  const CommonContainer({
     super.key,
     required this.title,
     required this.widgets,
@@ -18,7 +18,7 @@ class CommonContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(
+      padding: const EdgeInsets.symmetric(
         horizontal: 20,
         vertical: 15,
       ),
@@ -42,7 +42,7 @@ class CommonContainer extends StatelessWidget {
           ),
           Container(
             height: 1,
-            margin: EdgeInsets.symmetric(vertical: 7),
+            margin: const EdgeInsets.symmetric(vertical: 7),
             color: black10,
           ),
           Column(

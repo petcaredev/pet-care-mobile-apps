@@ -3,7 +3,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pet_care_mobile_apps/data/reservation_data.dart';
 import 'package:pet_care_mobile_apps/pages/second_reservation_page.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
-import 'package:pet_care_mobile_apps/utils/multi_argument.dart';
 import 'package:pet_care_mobile_apps/widgets/common_container.dart';
 import 'package:pet_care_mobile_apps/widgets/clinic_detail_card.dart';
 import 'package:pet_care_mobile_apps/widgets/reservation_checkbox.dart';
@@ -65,11 +64,11 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
           padding: const EdgeInsets.all(12),
           child: Column(
             children: [
-              ClinicDetailCard(
+              const ClinicDetailCard(
                 clinicName: 'clinicName',
                 clinicAddress:
                     'Jl. Kyai Mojo No.18A, Bumijo, Kec. Jetis, Kota Yogyakarta, Daerah Istimewa Yogyakarta 55231',
-                clinicDistance: 0.34,
+                clinicDistance: '0.5 km',
                 clinicPhone: '082289760911',
                 clinicPoster: 'https://picsum.photos/200/300',
               ),
@@ -146,7 +145,7 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
                 title: 'Pilih Layanan',
                 widgets: [
                   ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: serviceList.length,
                     itemBuilder: (context, index) {

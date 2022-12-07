@@ -63,13 +63,13 @@ class ServiceStatusCard extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 16,
                   vertical: 5,
                 ),
                 decoration: BoxDecoration(
                     color: mainColor, borderRadius: BorderRadius.circular(7)),
-                child: isDone ? Text('Selesai') : Text('Proses'),
+                child: isDone ? const Text('Selesai') : const Text('Proses'),
               ),
             ],
           ),

@@ -32,7 +32,7 @@ class HistoryPage extends StatelessWidget {
           ),
           automaticallyImplyLeading: false,
         ),
-        body: TabBarView(children: [ProcessPage(), DonePage()]),
+        body: const TabBarView(children: [ProcessPage(), DonePage()]),
       ),
     );
   }

@@ -61,7 +61,7 @@ class ReservationDetailPage extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 9,
                   ),
                   Text(
@@ -78,7 +78,7 @@ class ReservationDetailPage extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 9,
                   ),
                   Text(
@@ -95,7 +95,7 @@ class ReservationDetailPage extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 9,
                   ),
                   Text(
@@ -112,7 +112,7 @@ class ReservationDetailPage extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 9,
                   ),
                   Builder(
@@ -144,14 +144,14 @@ class ReservationDetailPage extends StatelessWidget {
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               CommonContainer(
                 title: 'Layanan',
                 widgets: [
                   ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: serviceList.length,
                     itemBuilder: (context, index) {
@@ -186,7 +186,7 @@ class ReservationDetailPage extends StatelessWidget {
                   ),
                   Container(
                     height: 1,
-                    margin: EdgeInsets.only(bottom: 9),
+                    margin: const EdgeInsets.only(bottom: 9),
                     color: black10,
                   ),
                   Row(
@@ -220,7 +220,7 @@ class ReservationDetailPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               CommonContainer(

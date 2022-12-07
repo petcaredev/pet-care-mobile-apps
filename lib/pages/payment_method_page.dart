@@ -46,14 +46,14 @@ class PaymentMethodPageState extends State<PaymentMethodPage> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12),
           child: Column(
             children: [
               CommonContainer(
                 title: 'Pilih Pembayaran',
                 widgets: [
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
+                    margin: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
                       border: Border.all(
                         width: 1,
@@ -101,7 +101,7 @@ class PaymentMethodPageState extends State<PaymentMethodPage> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 10),
+                    margin: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
                       border: Border.all(
                         width: 1,
@@ -141,11 +141,11 @@ class PaymentMethodPageState extends State<PaymentMethodPage> {
                                     color: Colors.black,
                                   ),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 8,
                                 ),
                                 Container(
-                                  padding: EdgeInsets.all(8),
+                                  padding: const EdgeInsets.all(8),
                                   decoration: BoxDecoration(
                                     color: mainColor,
                                     borderRadius: BorderRadius.circular(8),

@@ -9,9 +9,9 @@ class ProcessPage extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(12),
+          padding: const EdgeInsets.all(12),
           child: Column(
-            children: [
+            children: const [
               ServiceStatusCard(
                 name: "Ma'mur Zaky Nurrokhman",
                 petName: "Annabul M",
