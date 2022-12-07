@@ -4,7 +4,7 @@ import 'package:pet_care_mobile_apps/styles/styles.dart';
 class ClinicServiceCard extends StatelessWidget {
   final String serviceName;
   final String serviceDescription;
-  final int serviceFee;
+  final String serviceFee;
 
   const ClinicServiceCard({
     super.key,

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
 
 class ClinicDetailCard extends StatelessWidget {
   final String clinicName;
   final String clinicAddress;
-  final double clinicDistance;
+  final String clinicDistance;
   final String clinicPhone;
   final String clinicPoster;
 
@@ -63,11 +64,16 @@ class ClinicDetailCard extends StatelessWidget {
               children: [
                 ClipRRect(
                   borderRadius: BorderRadius.circular(9),
-                  child: Image(
-                    image: NetworkImage(clinicPoster),
+                  child: CachedNetworkImage(
+                    imageUrl: clinicPoster,
                     width: 100,
                     height: 66.67,
-                    fit: BoxFit.fitWidth,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                    errorWidget: (context, url, error) =>
+                        const Icon(Icons.error),
                   ),
                 ),
                 const SizedBox(
@@ -96,7 +102,7 @@ class ClinicDetailCard extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.navigation,
                             size: 14,
                             color: Colors.black,
@@ -105,7 +111,7 @@ class ClinicDetailCard extends StatelessWidget {
                             width: 5,
                           ),
                           Text(
-                            '$clinicDistance km dari Anda',
+                            '$clinicDistance dari Anda',
                             style: text10(
                               weight: FontWeight.w300,
                               color: Colors.black,
@@ -115,7 +121,7 @@ class ClinicDetailCard extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.phone,
                             size: 14,
                             color: Colors.black,
