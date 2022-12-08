@@ -9,36 +9,40 @@ class ClinicSearch {
   ClinicSearch({
     required this.error,
     required this.message,
+    required this.count,
     required this.data,
   });
 
   bool error;
   String message;
-  List<Datum> data;
+  int count;
+  List<Data> data;
 
   factory ClinicSearch.fromJson(Map<String, dynamic> json) => ClinicSearch(
         error: json["error"],
         message: json["message"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        count: json["count"],
+        data: List<Data>.from(json["data"].map((x) => Data.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "error": error,
         "message": message,
+        "count": count,
         "data": List<dynamic>.from(data.map((x) => x.toJson())),
       };
 }
 
-class Datum {
-  Datum({
+class Data {
+  Data({
     required this.id,
     required this.name,
     required this.address,
     required this.posterPath,
     required this.phone,
+    required this.distance,
     required this.createdAt,
     required this.updatedAt,
-    required this.userId,
   });
 
   int id;
@@ -46,19 +50,19 @@ class Datum {
   String address;
   String posterPath;
   String phone;
+  String distance;
   DateTime createdAt;
   DateTime updatedAt;
-  int userId;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["id"],
         name: json["name"],
         address: json["address"],
         posterPath: json["posterPath"],
         phone: json["phone"],
+        distance: json["distance"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
-        userId: json["userId"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -67,8 +71,8 @@ class Datum {
         "address": address,
         "posterPath": posterPath,
         "phone": phone,
+        "distance": distance,
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),
-        "userId": userId,
       };
 }
