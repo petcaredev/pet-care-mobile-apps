@@ -169,139 +169,329 @@ class _ProfilePageState extends State<ProfilePage> {
         ],
         automaticallyImplyLeading: false,
       ),
-      body: Consumer<ProfileProvider>(
-        builder: (context, provider, _) {
-          if (provider.state == ResultState.loading) {
-            return Container(
-              color: Colors.white,
-              child: const Center(
-                child: CircularProgressIndicator(),
+      // body: Consumer<ProfileProvider>(
+      //   builder: (context, provider, _) {
+      //     if (provider.state == ResultState.loading) {
+      //       return Container(
+      //         color: Colors.white,
+      //         child: const Center(
+      //           child: CircularProgressIndicator(),
+      //         ),
+      //       );
+      //     } else if (provider.state == ResultState.hasData) {
+      //       return SingleChildScrollView(
+      //         child: Padding(
+      //           padding: const EdgeInsets.symmetric(horizontal: 12),
+      //           child: Column(
+      //             crossAxisAlignment: CrossAxisAlignment.start,
+      //             children: [
+      //               Center(
+      //                 child: Padding(
+      //                   padding: const EdgeInsets.symmetric(
+      //                     horizontal: 137,
+      //                     vertical: 20,
+      //                   ),
+      //                   child: Icon(
+      //                     Icons.account_circle,
+      //                     color: otherColor,
+      //                     size: 100,
+      //                   ),
+      //                 ),
+      //               ),
+      //               Form(
+      //                 key: _profileFormKey,
+      //                 child: Column(
+      //                   children: [
+      //                     CustomTextFormField(
+      //                       textEditingController: nameController,
+      //                       textInputType: TextInputType.name,
+      //                       validation: 'Silahkan isi nama lengkap Anda',
+      //                       obscureText: false,
+      //                       hintText: 'Nama Lengkap',
+      //                       textColor: black50,
+      //                     ),
+      //                     const SizedBox(
+      //                       height: 15,
+      //                     ),
+      //                     CustomTextFormField(
+      //                       textEditingController: emailController,
+      //                       textInputType: TextInputType.emailAddress,
+      //                       validation: 'Silahkan isi nama lengkap Anda',
+      //                       obscureText: false,
+      //                       hintText: 'Email',
+      //                       textColor: black50,
+      //                     ),
+      //                     const SizedBox(
+      //                       height: 15,
+      //                     ),
+      //                     CustomTextFormField(
+      //                       textEditingController: phoneController,
+      //                       textInputType: TextInputType.phone,
+      //                       validation: 'Silahkan isi nomor telepon Anda',
+      //                       obscureText: false,
+      //                       hintText: 'No. Telepon',
+      //                       textColor: black50,
+      //                     ),
+      //                     const SizedBox(
+      //                       height: 15,
+      //                     ),
+      //                     CustomTextFormField(
+      //                       textEditingController: addressController,
+      //                       textInputType: TextInputType.streetAddress,
+      //                       validation: 'Silahkan isi alamat Anda',
+      //                       obscureText: false,
+      //                       hintText: 'Alamat',
+      //                       textColor: black50,
+      //                     ),
+      //                     const SizedBox(
+      //                       height: 15,
+      //                     ),
+      //                     CommonButton(
+      //                       onPressed: () {
+      //                         Navigator.pushNamed(
+      //                             context, ChangePasswordPage.route);
+      //                       },
+      //                       buttonColor: mainColor,
+      //                       buttonText: 'Ubah Password',
+      //                       textColor: Colors.white,
+      //                     ),
+      //                     const SizedBox(
+      //                       height: 15,
+      //                     ),
+      //                     CommonButton(
+      //                       onPressed: () {
+      //                         if (_profileFormKey.currentState!.validate()) {
+      //                           ScaffoldMessenger.of(context).showSnackBar(
+      //                             const SnackBar(
+      //                               content: Text('Data berhasil diubah'),
+      //                             ),
+      //                           );
+      //                         }
+      //                       },
+      //                       borderSide: BorderSide(
+      //                         width: 1,
+      //                         color: black15,
+      //                       ),
+      //                       buttonColor: Colors.transparent,
+      //                       buttonText: 'Ubah Data',
+      //                       textColor: black50,
+      //                     ),
+      //                     const SizedBox(
+      //                       height: 15,
+      //                     ),
+      //                   ],
+      //                 ),
+      //               ),
+      //             ],
+      //           ),
+      //         ),
+      //       );
+      //     } else if (provider.state == ResultState.error) {
+      //       return Container(
+      //         color: Colors.white,
+      //         child: Center(
+      //           child: Text(provider.resultError.message),
+      //         ),
+      //       );
+      //     } else {
+      //       return Container(
+      //         color: Colors.white,
+      //         child: const Center(
+      //           child: Text('Maaf, terjadi kesalahan'),
+      //         ),
+      //       );
+      //     }
+      //   },
+      // ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 137,
+                    vertical: 20,
+                  ),
+                  child: Icon(
+                    Icons.account_circle,
+                    color: otherColor,
+                    size: 100,
+                  ),
+                ),
               ),
-            );
-          } else if (provider.state == ResultState.hasData) {
-            return SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
+              Form(
+                key: _profileFormKey,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 137,
-                          vertical: 20,
-                        ),
-                        child: Icon(
-                          Icons.account_circle,
-                          color: otherColor,
-                          size: 100,
-                        ),
-                      ),
-                    ),
-                    Form(
-                      key: _profileFormKey,
-                      child: Column(
-                        children: [
-                          CustomTextFormField(
+                    Consumer<ProfileProvider>(
+                      builder: (context, provider, child) {
+                        if (provider.state == ResultState.loading) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: black15, width: 1),
+                              borderRadius: BorderRadius.circular(7),
+                            ),
+                            child: LinearProgressIndicator(
+                              color: mainColor,
+                              minHeight: 64,
+                            ),
+                          );
+                        } else if (provider.state == ResultState.hasData) {
+                          return CustomTextFormField(
                             textEditingController: nameController,
                             textInputType: TextInputType.name,
                             validation: 'Silahkan isi nama lengkap Anda',
                             obscureText: false,
                             hintText: 'Nama Lengkap',
                             textColor: black50,
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          CustomTextFormField(
+                          );
+                        } else if (provider.state == ResultState.error) {
+                          return Text(provider.resultError.message);
+                        } else {
+                          return Text('Maaf, terjadi kesalahan');
+                        }
+                      },
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Consumer<ProfileProvider>(
+                      builder: (context, provider, child) {
+                        if (provider.state == ResultState.loading) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: black15, width: 1),
+                              borderRadius: BorderRadius.circular(7),
+                            ),
+                            child: LinearProgressIndicator(
+                              color: mainColor,
+                              minHeight: 64,
+                            ),
+                          );
+                        } else if (provider.state == ResultState.hasData) {
+                          return CustomTextFormField(
                             textEditingController: emailController,
                             textInputType: TextInputType.emailAddress,
                             validation: 'Silahkan isi nama lengkap Anda',
                             obscureText: false,
                             hintText: 'Email',
                             textColor: black50,
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          CustomTextFormField(
+                          );
+                        } else if (provider.state == ResultState.error) {
+                          return Text(provider.resultError.message);
+                        } else {
+                          return Text('Maaf, terjadi kesalahan');
+                        }
+                      },
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Consumer<ProfileProvider>(
+                      builder: (context, provider, child) {
+                        if (provider.state == ResultState.loading) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: black15, width: 1),
+                              borderRadius: BorderRadius.circular(7),
+                            ),
+                            child: LinearProgressIndicator(
+                              color: mainColor,
+                              minHeight: 64,
+                            ),
+                          );
+                        } else if (provider.state == ResultState.hasData) {
+                          return CustomTextFormField(
                             textEditingController: phoneController,
                             textInputType: TextInputType.phone,
                             validation: 'Silahkan isi nomor telepon Anda',
                             obscureText: false,
                             hintText: 'No. Telepon',
                             textColor: black50,
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          CustomTextFormField(
+                          );
+                        } else if (provider.state == ResultState.error) {
+                          return Text(provider.resultError.message);
+                        } else {
+                          return Text('Maaf, terjadi kesalahan');
+                        }
+                      },
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    Consumer<ProfileProvider>(
+                      builder: (context, provider, child) {
+                        if (provider.state == ResultState.loading) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: black15, width: 1),
+                              borderRadius: BorderRadius.circular(7),
+                            ),
+                            child: LinearProgressIndicator(
+                              color: mainColor,
+                              minHeight: 64,
+                            ),
+                          );
+                        } else if (provider.state == ResultState.hasData) {
+                          return CustomTextFormField(
                             textEditingController: addressController,
                             textInputType: TextInputType.streetAddress,
                             validation: 'Silahkan isi alamat Anda',
                             obscureText: false,
                             hintText: 'Alamat',
                             textColor: black50,
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          CommonButton(
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                  context, ChangePasswordPage.route);
-                            },
-                            buttonColor: mainColor,
-                            buttonText: 'Ubah Password',
-                            textColor: Colors.white,
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          CommonButton(
-                            onPressed: () {
-                              if (_profileFormKey.currentState!.validate()) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Data berhasil diubah'),
-                                  ),
-                                );
-                              }
-                            },
-                            borderSide: BorderSide(
-                              width: 1,
-                              color: black15,
+                          );
+                        } else if (provider.state == ResultState.error) {
+                          return Text(provider.resultError.message);
+                        } else {
+                          return Text('Maaf, terjadi kesalahan');
+                        }
+                      },
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    CommonButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, ChangePasswordPage.route);
+                      },
+                      buttonColor: mainColor,
+                      buttonText: 'Ubah Password',
+                      textColor: Colors.white,
+                    ),
+                    const SizedBox(
+                      height: 15,
+                    ),
+                    CommonButton(
+                      onPressed: () {
+                        if (_profileFormKey.currentState!.validate()) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Data berhasil diubah'),
                             ),
-                            buttonColor: Colors.transparent,
-                            buttonText: 'Ubah Data',
-                            textColor: black50,
-                          ),
-                          const SizedBox(
-                            height: 15,
-                          ),
-                        ],
+                          );
+                        }
+                      },
+                      borderSide: BorderSide(
+                        width: 1,
+                        color: black15,
                       ),
+                      buttonColor: Colors.transparent,
+                      buttonText: 'Ubah Data',
+                      textColor: black50,
+                    ),
+                    const SizedBox(
+                      height: 15,
                     ),
                   ],
                 ),
               ),
-            );
-          } else if (provider.state == ResultState.error) {
-            return Container(
-              color: Colors.white,
-              child: Center(
-                child: Text(provider.resultError.message),
-              ),
-            );
-          } else {
-            return Container(
-              color: Colors.white,
-              child: const Center(
-                child: Text('Maaf, terjadi kesalahan'),
-              ),
-            );
-          }
-        },
+            ],
+          ),
+        ),
       ),
     );
   }
