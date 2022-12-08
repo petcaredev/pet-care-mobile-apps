@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:pet_care_mobile_apps/data/models/clinic_detail_model.dart';
 import 'package:pet_care_mobile_apps/data/models/signup_response.dart';
 import 'package:pet_care_mobile_apps/data/models/signin_response.dart';
 import 'package:pet_care_mobile_apps/data/models/clinic_model.dart';
+import 'package:pet_care_mobile_apps/data/models/clinic_detail_model.dart';
+import 'package:pet_care_mobile_apps/data/models/clinic_search.dart';
 import 'package:pet_care_mobile_apps/data/models/profile_response.dart';
 import 'package:pet_care_mobile_apps/data/models/error_response.dart';
 import 'package:pet_care_mobile_apps/data/models/form_error_response.dart';
@@ -84,6 +85,22 @@ class ApiService {
 
     if (response.statusCode == 200) {
       return ClinicDetailModel.fromJson(json.decode(response.body));
+    } else if (response.statusCode == 403 || response.statusCode == 401) {
+      return ErrorResponse.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Maaf, terjadi kesalahan');
+    }
+  }
+
+  Future<dynamic> searchClinic(
+      String accessToken, String origin, String query) async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/clinics/search/$query?origin=$origin'),
+      headers: {"Authorization": "Bearer $accessToken"},
+    );
+
+    if (response.statusCode == 200) {
+      return ClinicSearch.fromJson(json.decode(response.body));
     } else if (response.statusCode == 403 || response.statusCode == 401) {
       return ErrorResponse.fromJson(json.decode(response.body));
     } else {
