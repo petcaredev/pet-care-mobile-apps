@@ -155,7 +155,7 @@ class ReservationDetailPage extends StatelessWidget {
                     shrinkWrap: true,
                     itemCount: serviceList.length,
                     itemBuilder: (context, index) {
-                      final Service service = serviceList[index];
+                      final service = serviceList[index];
                       if (service.isChecked == true) {
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 12),
@@ -201,7 +201,7 @@ class ReservationDetailPage extends StatelessWidget {
                       ),
                       Builder(
                         builder: (context) {
-                          var totalPrice = 0;
+                          double totalPrice = 0;
                           for (var element in serviceList) {
                             if (element.isChecked == true) {
                               totalPrice += element.servicePrice;

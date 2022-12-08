@@ -15,6 +15,8 @@ import 'package:pet_care_mobile_apps/data/preferences/auth_preferences.dart';
 import 'package:pet_care_mobile_apps/providers/auth_preferences_provider.dart';
 import 'package:pet_care_mobile_apps/providers/auth_provider.dart';
 import 'package:pet_care_mobile_apps/providers/clinic_provider.dart';
+import 'package:pet_care_mobile_apps/providers/clinic_search_provider.dart';
+import 'package:pet_care_mobile_apps/providers/profile_provider.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -46,6 +48,16 @@ class PetCareApp extends StatelessWidget {
         ChangeNotifierProvider<ClinicProvider>(
           create: (context) => ClinicProvider(apiService: ApiService()),
         ),
+        ChangeNotifierProvider<ClinicSearchProvider>(
+          create: (context) => ClinicSearchProvider(
+            apiService: ApiService(),
+          ),
+        ),
+        ChangeNotifierProvider<ProfileProvider>(
+          create: (context) => ProfileProvider(
+            apiService: ApiService(),
+          ),
+        ),
       ],
       child: MaterialApp(
         title: 'Pet Care App',
@@ -75,7 +87,9 @@ class PetCareApp extends StatelessWidget {
           DetailPage.route: (context) => DetailPage(
                 id: ModalRoute.of(context)!.settings.arguments as int,
               ),
-          FirstReservationPage.route: (context) => const FirstReservationPage(),
+          FirstReservationPage.route: (context) => FirstReservationPage(
+                id: ModalRoute.of(context)!.settings.arguments as int,
+              ),
           SecondReservationPage.route: (context) =>
               const SecondReservationPage(),
           PaymentMethodPage.route: (context) => const PaymentMethodPage(),
@@ -84,9 +98,6 @@ class PetCareApp extends StatelessWidget {
           ReservationSuccessPage.route: (context) =>
               const ReservationSuccessPage(),
           ChangePasswordPage.route: (context) => const ChangePasswordPage(),
-          // SearchPage.route: (context) => SearchPage(),
-          // HistoryPage.route: (context) => HistoryPage(),
-          // ProfilePage.route: (context) => ProfilePage(),
         },
       ),
     );

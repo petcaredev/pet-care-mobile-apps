@@ -14,12 +14,12 @@ enum PaymentMethod { cash, transfer }
 
 PaymentMethod? paymentMethod;
 
-class Service {
+class DummyService {
   final String serviceName;
-  final int servicePrice;
+  final double servicePrice;
   late bool isChecked;
 
-  Service({
+  DummyService({
     required this.serviceName,
     required this.servicePrice,
     required this.isChecked,
@@ -27,17 +27,17 @@ class Service {
 }
 
 var serviceList = [
-  Service(
+  DummyService(
     serviceName: 'Grooming Sehat',
     servicePrice: 35000,
     isChecked: false,
   ),
-  Service(
+  DummyService(
     serviceName: 'Grooming Kering',
     servicePrice: 25000,
     isChecked: false,
   ),
-  Service(
+  DummyService(
     serviceName: 'Trimming',
     servicePrice: 15000,
     isChecked: false,

@@ -4,7 +4,7 @@ import 'package:pet_care_mobile_apps/styles/styles.dart';
 class ReservationCheckBox extends StatefulWidget {
   bool value;
   String serviceName;
-  int servicePrice;
+  double servicePrice;
   Function(bool?) onChanged;
 
   ReservationCheckBox({

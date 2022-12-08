@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ClinicDetailCard extends StatelessWidget {
   final String clinicName;
@@ -43,7 +44,15 @@ class ClinicDetailCard extends StatelessWidget {
                   ),
                 ),
                 TextButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      final mapLink = Uri.parse(
+                          'https://www.google.co.id/maps/place/${clinicAddress.split(' ').join('+')}');
+                      if (await canLaunchUrl(mapLink)) {
+                        launchUrl(mapLink);
+                      } else {
+                        throw "Couldn't launch $mapLink";
+                      }
+                    },
                     child: Text(
                       'Lihat Peta >',
                       style: text12(

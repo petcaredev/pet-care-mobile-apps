@@ -53,11 +53,16 @@ class _ClinicListPageState extends State<ClinicListPage> {
               },
             );
           } else if (provider.state == ResultState.error) {
-            return Center(
-              child: Text(provider.resultError.message),
+            return Container(
+              color: Colors.white,
+              child: Center(
+                child: Text(provider.resultError.message),
+              ),
             );
           } else {
-            return const Center(child: Text('Maaf, terjadi kesalahan'));
+            return Container(
+                color: Colors.white,
+                child: const Center(child: Text('Maaf, terjadi kesalahan')));
           }
         },
       ),

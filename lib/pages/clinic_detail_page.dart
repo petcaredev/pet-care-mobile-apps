@@ -28,7 +28,7 @@ class DetailPage extends StatelessWidget {
       child: Consumer<ClinicDetailProvider>(builder: (context, provider, _) {
         if (provider.state == ResultState.loading) {
           return Container(
-            color: Colors.brown.shade100,
+            color: Colors.white,
             child: const Center(
               child: CircularProgressIndicator(),
             ),
@@ -52,7 +52,8 @@ class DetailPage extends StatelessWidget {
             ),
             bottomNavigationBar: SingleButtonNavigationBar(
               onPressed: () {
-                Navigator.pushNamed(context, FirstReservationPage.route);
+                Navigator.pushNamed(context, FirstReservationPage.route,
+                    arguments: id);
               },
               buttonText: 'Reservasi',
             ),
@@ -95,12 +96,18 @@ class DetailPage extends StatelessWidget {
             ),
           );
         } else if (provider.state == ResultState.error) {
-          return Center(
-            child: Text(provider.resultError.message),
+          return Container(
+            color: Colors.white,
+            child: Center(
+              child: Text(provider.resultError.message),
+            ),
           );
         } else {
-          return const Center(
-            child: Text('Maaf, terjadi kesalahan'),
+          return Container(
+            color: Colors.white,
+            child: const Center(
+              child: Text('Maaf, terjadi kesalahan'),
+            ),
           );
         }
       }),
