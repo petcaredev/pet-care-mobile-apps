@@ -16,13 +16,13 @@ class ClinicSearch {
   bool error;
   String message;
   int count;
-  List<Datum> data;
+  List<Data> data;
 
   factory ClinicSearch.fromJson(Map<String, dynamic> json) => ClinicSearch(
         error: json["error"],
         message: json["message"],
         count: json["count"],
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        data: List<Data>.from(json["data"].map((x) => Data.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -33,8 +33,8 @@ class ClinicSearch {
       };
 }
 
-class Datum {
-  Datum({
+class Data {
+  Data({
     required this.id,
     required this.name,
     required this.address,
@@ -54,7 +54,7 @@ class Datum {
   DateTime createdAt;
   DateTime updatedAt;
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["id"],
         name: json["name"],
         address: json["address"],

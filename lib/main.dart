@@ -48,11 +48,6 @@ class PetCareApp extends StatelessWidget {
         ChangeNotifierProvider<ClinicProvider>(
           create: (context) => ClinicProvider(apiService: ApiService()),
         ),
-        ChangeNotifierProvider<ClinicSearchProvider>(
-          create: (context) => ClinicSearchProvider(
-            apiService: ApiService(),
-          ),
-        ),
         ChangeNotifierProvider<ProfileProvider>(
           create: (context) => ProfileProvider(
             apiService: ApiService(),
