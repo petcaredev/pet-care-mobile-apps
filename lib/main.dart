@@ -15,7 +15,6 @@ import 'package:pet_care_mobile_apps/data/preferences/auth_preferences.dart';
 import 'package:pet_care_mobile_apps/providers/auth_preferences_provider.dart';
 import 'package:pet_care_mobile_apps/providers/auth_provider.dart';
 import 'package:pet_care_mobile_apps/providers/clinic_provider.dart';
-import 'package:pet_care_mobile_apps/providers/clinic_search_provider.dart';
 import 'package:pet_care_mobile_apps/providers/profile_provider.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
 import 'package:provider/provider.dart';

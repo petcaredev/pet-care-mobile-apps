@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pet_care_mobile_apps/data/account_data.dart';
 import 'package:pet_care_mobile_apps/pages/change_password_page.dart';
 import 'package:pet_care_mobile_apps/pages/login_page.dart';
 import 'package:pet_care_mobile_apps/providers/profile_provider.dart';
@@ -20,44 +19,6 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final _profileFormKey = GlobalKey<FormState>();
-
-  ProfileProvider? _profileProvider;
-  String? _accessToken;
-  int? _id;
-
-  TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController phoneController = TextEditingController();
-  TextEditingController addressController = TextEditingController();
-
-  void loadProfile() {
-    setState(() {
-      _profileProvider = Provider.of<ProfileProvider>(context, listen: false);
-      _profileProvider!.fetchUserProfile();
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      final authPreferencesProvider =
-          Provider.of<AuthPreferencesProvider>(context, listen: false);
-      final profileProvider =
-          Provider.of<ProfileProvider>(context, listen: false);
-      _accessToken = authPreferencesProvider.dataUserAuth['accessToken'];
-      _id = authPreferencesProvider.dataUserAuth['id'];
-      nameController =
-          TextEditingController(text: profileProvider.result.data.name);
-      emailController =
-          TextEditingController(text: profileProvider.result.data.email);
-      phoneController =
-          TextEditingController(text: profileProvider.result.data.phone);
-      addressController =
-          TextEditingController(text: profileProvider.result.data.address);
-      loadProfile();
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -201,7 +162,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           );
                         } else if (provider.state == ResultState.hasData) {
                           return CustomTextFormField(
-                            textEditingController: nameController,
+                            textEditingController: TextEditingController(
+                                text: provider.result.data.name),
                             textInputType: TextInputType.name,
                             validation: 'Silahkan isi nama lengkap Anda',
                             obscureText: false,
@@ -209,9 +171,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             textColor: black50,
                           );
                         } else if (provider.state == ResultState.error) {
-                          return Text(provider.resultError.message);
+                          return Text(provider.message);
                         } else {
-                          return Text('Maaf, terjadi kesalahan');
+                          return const Text('Maaf, terjadi kesalahan');
                         }
                       },
                     ),
@@ -233,17 +195,18 @@ class _ProfilePageState extends State<ProfilePage> {
                           );
                         } else if (provider.state == ResultState.hasData) {
                           return CustomTextFormField(
-                            textEditingController: emailController,
+                            textEditingController: TextEditingController(
+                                text: provider.result.data.email),
                             textInputType: TextInputType.emailAddress,
-                            validation: 'Silahkan isi nama lengkap Anda',
+                            validation: 'Silahkan isi email Anda',
                             obscureText: false,
                             hintText: 'Email',
                             textColor: black50,
                           );
                         } else if (provider.state == ResultState.error) {
-                          return Text(provider.resultError.message);
+                          return Text(provider.message);
                         } else {
-                          return Text('Maaf, terjadi kesalahan');
+                          return const Text('Maaf, terjadi kesalahan');
                         }
                       },
                     ),
@@ -265,7 +228,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           );
                         } else if (provider.state == ResultState.hasData) {
                           return CustomTextFormField(
-                            textEditingController: phoneController,
+                            textEditingController: TextEditingController(
+                                text: provider.result.data.phone),
                             textInputType: TextInputType.phone,
                             validation: 'Silahkan isi nomor telepon Anda',
                             obscureText: false,
@@ -273,9 +237,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             textColor: black50,
                           );
                         } else if (provider.state == ResultState.error) {
-                          return Text(provider.resultError.message);
+                          return Text(provider.message);
                         } else {
-                          return Text('Maaf, terjadi kesalahan');
+                          return const Text('Maaf, terjadi kesalahan');
                         }
                       },
                     ),
@@ -297,7 +261,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           );
                         } else if (provider.state == ResultState.hasData) {
                           return CustomTextFormField(
-                            textEditingController: addressController,
+                            textEditingController: TextEditingController(
+                                text: provider.result.data.address),
                             textInputType: TextInputType.streetAddress,
                             validation: 'Silahkan isi alamat Anda',
                             obscureText: false,
@@ -305,9 +270,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             textColor: black50,
                           );
                         } else if (provider.state == ResultState.error) {
-                          return Text(provider.resultError.message);
+                          return Text(provider.message);
                         } else {
-                          return Text('Maaf, terjadi kesalahan');
+                          return const Text('Maaf, terjadi kesalahan');
                         }
                       },
                     ),

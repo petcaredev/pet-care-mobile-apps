@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pet_care_mobile_apps/data/api/api_service.dart';
@@ -39,7 +37,7 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
           if (provider.state == ResultState.loading) {
             return Container(
               color: Colors.white,
-              child: Center(
+              child: const Center(
                 child: CircularProgressIndicator(),
               ),
             );

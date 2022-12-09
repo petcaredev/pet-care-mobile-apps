@@ -110,7 +110,7 @@ class ApiService {
     }
   }
 
-  Future<dynamic> getUserProfile(String accessToken, int id) async {
+  Future<ProfileResponse> getUserProfile(String accessToken, int id) async {
     final response = await http.get(
       Uri.parse('$baseUrl/users/$id'),
       headers: {"Authorization": "Bearer $accessToken"},
@@ -118,8 +118,6 @@ class ApiService {
 
     if (response.statusCode == 200) {
       return ProfileResponse.fromJson(json.decode(response.body));
-    } else if (response.statusCode == 404) {
-      return ErrorResponse.fromJson(json.decode(response.body));
     } else {
       throw Exception('Maaf, terjadi kesalahan');
     }
