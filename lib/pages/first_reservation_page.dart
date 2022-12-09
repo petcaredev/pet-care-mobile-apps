@@ -45,8 +45,10 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
             if (serviceChecked.length != provider.detail.data.services.length) {
               for (var i = 0; i < provider.detail.data.services.length; i++) {
                 serviceChecked.add(false);
+                serviceSelected.add(0);
               }
             }
+            print('Service checked = $serviceChecked');
 
             return Scaffold(
               appBar: AppBar(
@@ -72,10 +74,17 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
               bottomNavigationBar: SingleButtonNavigationBar(
                 onPressed: () {
                   for (var element in serviceChecked) {
+                    print('element = $element');
                     if (element == true && reservationDate != null) {
-                      Navigator.pushNamed(context, SecondReservationPage.route);
+                      Navigator.pushNamed(
+                        context,
+                        SecondReservationPage.route,
+                        arguments: widget.id,
+                      );
                       break;
-                    } else {
+                    }
+
+                    if (element == false || reservationDate == null) {
                       Fluttertoast.showToast(
                         msg:
                             'Silahkan pilih tanggal reservasi dan layanan yang Anda inginkan',
@@ -184,14 +193,14 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
                                 value: serviceChecked[index],
                                 onChanged: (value) {
                                   if (value == true) {
-                                    serviceSelected.insert(
-                                        index, serviceItem.id);
+                                    serviceSelected[index] = serviceItem.id;
                                   } else {
-                                    serviceSelected.removeAt(index);
+                                    serviceSelected[index] = 0;
                                   }
                                   setState(() {
                                     serviceChecked[index] = value!;
                                   });
+                                  print('Service selected = $serviceSelected');
                                 },
                               );
                             },

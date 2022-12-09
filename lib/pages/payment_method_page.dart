@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:pet_care_mobile_apps/data/reservation_data.dart';
 import 'package:pet_care_mobile_apps/pages/reservation_detail_page.dart';
 import 'package:pet_care_mobile_apps/styles/styles.dart';
@@ -8,7 +9,12 @@ import 'package:pet_care_mobile_apps/widgets/single_button_navigation_bar.dart';
 class PaymentMethodPage extends StatefulWidget {
   static const route = '/payment-method-page';
 
-  const PaymentMethodPage({super.key});
+  final int id;
+
+  const PaymentMethodPage({
+    super.key,
+    required this.id,
+  });
 
   @override
   State<PaymentMethodPage> createState() => PaymentMethodPageState();
@@ -40,7 +46,17 @@ class PaymentMethodPageState extends State<PaymentMethodPage> {
       ),
       bottomNavigationBar: SingleButtonNavigationBar(
         onPressed: () {
-          Navigator.pushNamed(context, ReservationDetailPage.route);
+          if (paymentMethod != null) {
+            Navigator.pushNamed(
+              context,
+              ReservationDetailPage.route,
+              arguments: widget.id,
+            );
+          } else {
+            Fluttertoast.showToast(
+              msg: 'Silahkan pilih metode pembayaran yang ingin Anda gunakan',
+            );
+          }
         },
         buttonText: 'Selanjutnya',
       ),

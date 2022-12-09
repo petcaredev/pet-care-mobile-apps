@@ -84,11 +84,15 @@ class PetCareApp extends StatelessWidget {
           FirstReservationPage.route: (context) => FirstReservationPage(
                 id: ModalRoute.of(context)!.settings.arguments as int,
               ),
-          SecondReservationPage.route: (context) =>
-              const SecondReservationPage(),
-          PaymentMethodPage.route: (context) => const PaymentMethodPage(),
-          ReservationDetailPage.route: (context) =>
-              const ReservationDetailPage(),
+          SecondReservationPage.route: (context) => SecondReservationPage(
+                id: ModalRoute.of(context)!.settings.arguments as int,
+              ),
+          PaymentMethodPage.route: (context) => PaymentMethodPage(
+                id: ModalRoute.of(context)!.settings.arguments as int,
+              ),
+          ReservationDetailPage.route: (context) => ReservationDetailPage(
+                id: ModalRoute.of(context)!.settings.arguments as int,
+              ),
           ReservationSuccessPage.route: (context) =>
               const ReservationSuccessPage(),
           ChangePasswordPage.route: (context) => const ChangePasswordPage(),

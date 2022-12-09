@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'account_data.dart';
-
 DateTime? reservationDate;
 
 List<bool> serviceChecked = [];
 List<int> serviceSelected = [];
 
-TextEditingController fullNameController =
-    TextEditingController(text: fullName);
+TextEditingController fullNameController = TextEditingController();
 TextEditingController petNameController = TextEditingController();
 TextEditingController petTypeController = TextEditingController();
 TextEditingController optionalNoteController = TextEditingController();

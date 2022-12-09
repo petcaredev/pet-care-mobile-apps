@@ -11,12 +11,12 @@ class ProfileProvider extends ChangeNotifier {
     fetchUserProfile();
   }
 
-  late ProfileResponse _profileResponse;
-  late ResultState _state;
+  ProfileResponse? _profileResponse;
+  ResultState? _state;
   String _message = '';
 
-  ProfileResponse get result => _profileResponse;
-  ResultState get state => _state;
+  ProfileResponse? get result => _profileResponse;
+  ResultState? get state => _state;
   String get message => _message;
 
   Future<dynamic> fetchUserProfile() async {

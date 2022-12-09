@@ -176,7 +176,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         } else if (provider.state == ResultState.hasData) {
                           return CustomTextFormField(
                             textEditingController: TextEditingController(
-                                text: provider.result.data.name),
+                                text: provider.result!.data.name),
                             textInputType: TextInputType.name,
                             validation: 'Silahkan isi nama lengkap Anda',
                             obscureText: false,
@@ -212,7 +212,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         } else if (provider.state == ResultState.hasData) {
                           return CustomTextFormField(
                             textEditingController: TextEditingController(
-                                text: provider.result.data.email),
+                                text: provider.result!.data.email),
                             textInputType: TextInputType.emailAddress,
                             validation: 'Silahkan isi email Anda',
                             obscureText: false,
@@ -248,7 +248,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         } else if (provider.state == ResultState.hasData) {
                           return CustomTextFormField(
                             textEditingController: TextEditingController(
-                                text: provider.result.data.phone),
+                                text: provider.result!.data.phone),
                             textInputType: TextInputType.phone,
                             validation: 'Silahkan isi nomor telepon Anda',
                             obscureText: false,
@@ -284,7 +284,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         } else if (provider.state == ResultState.hasData) {
                           return CustomTextFormField(
                             textEditingController: TextEditingController(
-                                text: provider.result.data.address),
+                                text: provider.result!.data.address),
                             textInputType: TextInputType.streetAddress,
                             validation: 'Silahkan isi alamat Anda',
                             obscureText: false,
@@ -329,7 +329,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                       .dataUserAuth['accessToken'],
                                   Provider.of<ProfileProvider>(context,
                                           listen: false)
-                                      .result
+                                      .result!
                                       .data
                                       .id)
                               .then((value) {

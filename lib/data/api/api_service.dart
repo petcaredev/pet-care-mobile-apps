@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:pet_care_mobile_apps/data/models/add_reservation_response.dart';
 import 'package:pet_care_mobile_apps/data/models/clinic_detail_model.dart';
 import 'package:pet_care_mobile_apps/data/models/clinic_search.dart';
+import 'package:pet_care_mobile_apps/data/models/reservation_response.dart';
 import 'package:pet_care_mobile_apps/data/models/signup_response.dart';
 import 'package:pet_care_mobile_apps/data/models/signin_response.dart';
 import 'package:pet_care_mobile_apps/data/models/clinic_model.dart';
@@ -160,6 +162,53 @@ class ApiService {
       return ClinicSearch.fromJson(json.decode(response.body));
     } else if (response.statusCode == 404) {
       return ErrorResponse.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Maaf, terjadi kesalahan');
+    }
+  }
+
+  Future<ReservationResponse> getReservation(String accessToken, int id) async {
+    final response = await http.get(
+      Uri.parse('$baseUrl/reservations/$id'),
+      headers: {"Authorization": "Bearer $accessToken"},
+    );
+
+    if (response.statusCode == 200) {
+      return ReservationResponse.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Maaf, terjadi kesalahan');
+    }
+  }
+
+  Future<AddReservationResponse> addReservation(
+    int userId,
+    int clinicId,
+    DateTime date,
+    String petName,
+    String petType,
+    String note,
+    List<int> services,
+    String accessToken,
+  ) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/reservations'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $accessToken'
+      },
+      body: jsonEncode({
+        "userId": userId,
+        "clinicId": clinicId,
+        "date": date,
+        "petName": petName,
+        "petType": petType,
+        "description": note,
+        "services": services
+      }),
+    );
+
+    if (response.statusCode == 201) {
+      return AddReservationResponse.fromJson(json.decode(response.body));
     } else {
       throw Exception('Maaf, terjadi kesalahan');
     }
