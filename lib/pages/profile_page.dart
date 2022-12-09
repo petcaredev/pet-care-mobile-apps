@@ -25,12 +25,6 @@ class _ProfilePageState extends State<ProfilePage> {
   String? _accessToken;
   int? _id;
 
-  // TextEditingController nameController = TextEditingController(text: fullName);
-  // TextEditingController emailController = TextEditingController(text: email);
-  // TextEditingController phoneController = TextEditingController(text: phone);
-  // TextEditingController addressController =
-  //     TextEditingController(text: address);
-
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
@@ -72,7 +66,7 @@ class _ProfilePageState extends State<ProfilePage> {
         backgroundColor: Colors.white,
         title: Text(
           'Profil',
-          style: text13(weight: FontWeight.w400),
+          style: text14(weight: FontWeight.w500),
         ),
         actions: [
           IconButton(

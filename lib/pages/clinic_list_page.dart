@@ -19,7 +19,9 @@ class _ClinicListPageState extends State<ClinicListPage> {
       appBar: AppBar(
         title: Text(
           'Klinik Sekitar Anda',
-          style: text13(weight: FontWeight.w400),
+          style: text14(
+            weight: FontWeight.w500,
+          ),
         ),
         actions: [
           IconButton(

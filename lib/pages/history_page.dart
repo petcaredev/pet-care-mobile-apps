@@ -15,7 +15,7 @@ class HistoryPage extends StatelessWidget {
           backgroundColor: Colors.white,
           title: Text(
             'Riwayat',
-            style: text13(weight: FontWeight.w400),
+            style: text14(weight: FontWeight.w500),
           ),
           bottom: TabBar(
             labelColor: mainColor,
