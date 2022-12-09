@@ -1,11 +1,9 @@
-import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:pet_care_mobile_apps/data/api/api_service.dart';
 import 'package:pet_care_mobile_apps/data/models/clinic_detail_model.dart';
 import 'package:pet_care_mobile_apps/data/models/error_response.dart';
 import 'package:pet_care_mobile_apps/utils/get_data_user_auth.dart';
 import 'package:pet_care_mobile_apps/utils/result_state.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class ClinicDetailProvider extends ChangeNotifier {
   final ApiService apiService;

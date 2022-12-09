@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:pet_care_mobile_apps/data/api/api_service.dart';
 import 'package:pet_care_mobile_apps/data/models/clinic_search.dart';
 import 'package:pet_care_mobile_apps/data/models/error_response.dart';
-import 'package:pet_care_mobile_apps/utils/get_data_user_auth.dart';
 
 import 'package:pet_care_mobile_apps/utils/result_state.dart';
 import 'package:shared_preferences/shared_preferences.dart';

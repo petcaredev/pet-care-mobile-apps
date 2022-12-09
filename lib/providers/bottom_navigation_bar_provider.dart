@@ -19,7 +19,6 @@ class BottomNavigationBarProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // reset current index
   resetCurrentIndex() {
     currentIndex = 0;
     notifyListeners();
