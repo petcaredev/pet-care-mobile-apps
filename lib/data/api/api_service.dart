@@ -2,12 +2,11 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:pet_care_mobile_apps/data/models/clinic_detail_model.dart';
 import 'package:pet_care_mobile_apps/data/models/clinic_search.dart';
-
 import 'package:pet_care_mobile_apps/data/models/signup_response.dart';
 import 'package:pet_care_mobile_apps/data/models/signin_response.dart';
 import 'package:pet_care_mobile_apps/data/models/clinic_model.dart';
-
 import 'package:pet_care_mobile_apps/data/models/profile_response.dart';
+import 'package:pet_care_mobile_apps/data/models/update_profile_response,dart';
 import 'package:pet_care_mobile_apps/data/models/error_response.dart';
 import 'package:pet_care_mobile_apps/data/models/form_error_response.dart';
 
@@ -118,6 +117,33 @@ class ApiService {
 
     if (response.statusCode == 200) {
       return ProfileResponse.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Maaf, terjadi kesalahan');
+    }
+  }
+
+  Future<dynamic> updateUserProfile(String name, String email, String phone,
+      String address, String accessToken, int id) async {
+    final response = await http.put(
+      Uri.parse('$baseUrl/users/$id'),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $accessToken'
+      },
+      body: jsonEncode({
+        'name': name,
+        'email': email,
+        'phone': phone,
+        'address': address,
+      }),
+    );
+
+    if (response.statusCode == 200) {
+      return UpdateProfileResponse.fromJson(json.decode(response.body));
+    } else if (response.statusCode == 400) {
+      return ErrorResponse.fromJson(json.decode(response.body));
+    } else if (response.statusCode == 422) {
+      return FormErrorResponse.fromJson(json.decode(response.body));
     } else {
       throw Exception('Maaf, terjadi kesalahan');
     }

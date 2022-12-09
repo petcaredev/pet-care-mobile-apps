@@ -90,7 +90,7 @@ class Service {
 
   int id;
   String name;
-  String price;
+  int price;
   String description;
 
   factory Service.fromJson(Map<String, dynamic> json) => Service(

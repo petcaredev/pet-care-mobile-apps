@@ -10,12 +10,14 @@ class CustomTextFormField extends StatefulWidget {
   final String hintText;
   final Widget? suffix;
   final Color textColor;
+  final Function(String)? onFieldSubmitted;
 
   const CustomTextFormField({
     super.key,
     required this.textEditingController,
     required this.textInputType,
     required this.hintText,
+    this.onFieldSubmitted,
     this.validation,
     this.obscureText = false,
     this.maxLines,
@@ -38,6 +40,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         }
         return null;
       },
+      onFieldSubmitted: widget.onFieldSubmitted,
       style: text13(
         weight: FontWeight.w400,
         color: widget.textColor,

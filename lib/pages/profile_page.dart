@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet_care_mobile_apps/data/api/api_service.dart';
 import 'package:pet_care_mobile_apps/pages/change_password_page.dart';
 import 'package:pet_care_mobile_apps/pages/login_page.dart';
 import 'package:pet_care_mobile_apps/providers/profile_provider.dart';
@@ -19,6 +20,18 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   final _profileFormKey = GlobalKey<FormState>();
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+
+  ApiService apiService = ApiService();
+
+  String nameValue = '';
+  String emailValue = '';
+  String phoneValue = '';
+  String addressValue = '';
 
   @override
   Widget build(BuildContext context) {
@@ -148,7 +161,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Column(
                   children: [
                     Consumer<ProfileProvider>(
-                      builder: (context, provider, child) {
+                      builder: (context, provider, _) {
                         if (provider.state == ResultState.loading) {
                           return Container(
                             decoration: BoxDecoration(
@@ -169,6 +182,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             obscureText: false,
                             hintText: 'Nama Lengkap',
                             textColor: black50,
+                            onFieldSubmitted: (value) {
+                              nameValue = value;
+                            },
                           );
                         } else if (provider.state == ResultState.error) {
                           return Text(provider.message);
@@ -181,7 +197,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       height: 15,
                     ),
                     Consumer<ProfileProvider>(
-                      builder: (context, provider, child) {
+                      builder: (context, provider, _) {
                         if (provider.state == ResultState.loading) {
                           return Container(
                             decoration: BoxDecoration(
@@ -202,6 +218,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             obscureText: false,
                             hintText: 'Email',
                             textColor: black50,
+                            onFieldSubmitted: (value) {
+                              emailValue = value;
+                            },
                           );
                         } else if (provider.state == ResultState.error) {
                           return Text(provider.message);
@@ -214,7 +233,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       height: 15,
                     ),
                     Consumer<ProfileProvider>(
-                      builder: (context, provider, child) {
+                      builder: (context, provider, _) {
                         if (provider.state == ResultState.loading) {
                           return Container(
                             decoration: BoxDecoration(
@@ -235,6 +254,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             obscureText: false,
                             hintText: 'No. Telepon',
                             textColor: black50,
+                            onFieldSubmitted: (value) {
+                              phoneValue = value;
+                            },
                           );
                         } else if (provider.state == ResultState.error) {
                           return Text(provider.message);
@@ -247,7 +269,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       height: 15,
                     ),
                     Consumer<ProfileProvider>(
-                      builder: (context, provider, child) {
+                      builder: (context, provider, _) {
                         if (provider.state == ResultState.loading) {
                           return Container(
                             decoration: BoxDecoration(
@@ -268,6 +290,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             obscureText: false,
                             hintText: 'Alamat',
                             textColor: black50,
+                            onFieldSubmitted: (value) {
+                              addressValue = value;
+                            },
                           );
                         } else if (provider.state == ResultState.error) {
                           return Text(provider.message);
@@ -293,6 +318,23 @@ class _ProfilePageState extends State<ProfilePage> {
                     CommonButton(
                       onPressed: () {
                         if (_profileFormKey.currentState!.validate()) {
+                          ApiService()
+                              .updateUserProfile(
+                                  nameValue,
+                                  emailValue,
+                                  phoneValue,
+                                  addressValue,
+                                  Provider.of<AuthPreferencesProvider>(context,
+                                          listen: false)
+                                      .dataUserAuth['accessToken'],
+                                  Provider.of<ProfileProvider>(context,
+                                          listen: false)
+                                      .result
+                                      .data
+                                      .id)
+                              .then((value) {
+                            apiService = value as ApiService;
+                          });
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text('Data berhasil diubah'),

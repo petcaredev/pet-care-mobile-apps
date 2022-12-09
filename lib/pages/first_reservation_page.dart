@@ -176,7 +176,7 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
                                   serviceItem.id.toString());
                               return ReservationCheckBox(
                                 serviceName: serviceItem.name,
-                                servicePrice: double.parse(serviceItem.price),
+                                servicePrice: serviceItem.price,
                                 value: serviceChecked,
                                 onChanged: (value) {
                                   setState(() {

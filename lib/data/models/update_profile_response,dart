@@ -1,0 +1,26 @@
+import 'dart:convert';
+
+UpdateProfileResponse updateProfileResponseFromJson(String str) =>
+    UpdateProfileResponse.fromJson(json.decode(str));
+
+String updateProfileResponseToJson(UpdateProfileResponse data) => json.encode(data.toJson());
+
+class UpdateProfileResponse {
+  UpdateProfileResponse({
+    required this.error,
+    required this.message,
+  });
+
+  bool error;
+  String message;
+
+  factory UpdateProfileResponse.fromJson(Map<String, dynamic> json) => UpdateProfileResponse(
+        error: json["error"],
+        message: json["message"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "error": error,
+        "message": message,
+      };
+}

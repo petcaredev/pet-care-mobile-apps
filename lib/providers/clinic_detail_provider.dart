@@ -33,20 +33,40 @@ class ClinicDetailProvider extends ChangeNotifier {
       notifyListeners();
       final response =
           await apiService.getClinicDetail(accessToken, origin, id);
-      if (!response.error) {
-        _state = ResultState.hasData;
-        notifyListeners();
-        return _clinicDetailModel = response;
-      } else {
-        if (response is ErrorResponse) {
-          _state = ResultState.error;
+      // if (!response.error) {
+      //   _state = ResultState.hasData;
+      //   notifyListeners();
+      //   return _clinicDetailModel = response;
+      // } else {
+      //   if (response is ErrorResponse) {
+      //     _state = ResultState.error;
+      //     notifyListeners();
+      //     return _errorResponse = response;
+      //   } else {
+      //     _state = ResultState.error;
+      //     notifyListeners();
+      //     return _message = response.message;
+      //   }
+      // }
+
+      if (response is ClinicDetailModel) {
+        if (response.data.toJson().isEmpty) {
+          _state = ResultState.noData;
           notifyListeners();
-          return _errorResponse = response;
+          return _message = 'Tidak ada data';
         } else {
-          _state = ResultState.error;
+          _state = ResultState.hasData;
           notifyListeners();
-          return _message = response.message;
+          return _clinicDetailModel = response;
         }
+      } else if (response is ErrorResponse) {
+        _state = ResultState.error;
+        notifyListeners();
+        return _errorResponse = response;
+      } else {
+        _state = ResultState.error;
+        notifyListeners();
+        return _message = response.message;
       }
     } catch (e) {
       _state = ResultState.error;
