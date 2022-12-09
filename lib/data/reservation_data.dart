@@ -4,6 +4,9 @@ import 'account_data.dart';
 
 DateTime? reservationDate;
 
+List<bool> serviceChecked = [];
+List<int> serviceSelected = [];
+
 TextEditingController fullNameController =
     TextEditingController(text: fullName);
 TextEditingController petNameController = TextEditingController();

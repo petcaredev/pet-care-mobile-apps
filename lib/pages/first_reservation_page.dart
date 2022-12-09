@@ -42,6 +42,12 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
               ),
             );
           } else if (provider.state == ResultState.hasData) {
+            if (serviceChecked.length != provider.detail.data.services.length) {
+              for (var i = 0; i < provider.detail.data.services.length; i++) {
+                serviceChecked.add(false);
+              }
+            }
+
             return Scaffold(
               appBar: AppBar(
                 backgroundColor: Colors.white,
@@ -65,8 +71,8 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
               ),
               bottomNavigationBar: SingleButtonNavigationBar(
                 onPressed: () {
-                  for (var element in serviceList) {
-                    if (element.isChecked == true && reservationDate != null) {
+                  for (var element in serviceChecked) {
+                    if (element == true && reservationDate != null) {
                       Navigator.pushNamed(context, SecondReservationPage.route);
                       break;
                     } else {
@@ -172,15 +178,19 @@ class _FirstReservationPageState extends State<FirstReservationPage> {
                               final serviceItem =
                                   provider.detail.data.services[index];
 
-                              bool serviceChecked = bool.hasEnvironment(
-                                  serviceItem.id.toString());
                               return ReservationCheckBox(
                                 serviceName: serviceItem.name,
                                 servicePrice: serviceItem.price,
-                                value: serviceChecked,
+                                value: serviceChecked[index],
                                 onChanged: (value) {
+                                  if (value == true) {
+                                    serviceSelected.insert(
+                                        index, serviceItem.id);
+                                  } else {
+                                    serviceSelected.removeAt(index);
+                                  }
                                   setState(() {
-                                    serviceChecked = value!;
+                                    serviceChecked[index] = value!;
                                   });
                                 },
                               );
